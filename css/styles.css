@@ -232,6 +232,43 @@ h1 .accent { color: var(--accent); font-style: normal; }
   .race-status { grid-column: 1 / -1; justify-self: start; }
 }
 
+/* ---------- PARA MARCAS / SERVIÇOS ---------- */
+.services { background: var(--bg-page-alt, #F7F7F6); border-top: 1px solid var(--line); padding: clamp(56px, 8vw, 110px) clamp(28px, 6vw, 96px); }
+.services-inner { max-width: 1080px; margin: 0 auto; }
+
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(20px, 3vw, 28px); margin-top: clamp(40px, 5vw, 64px); }
+.service-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: clamp(24px, 3vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.service-head { display: flex; flex-direction: column; gap: 8px; }
+.service-num { font-family: var(--display); font-size: 1rem; font-weight: 400; color: var(--accent); letter-spacing: 0.06em; }
+.service-title { font-family: var(--display); font-weight: 400; font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.05; text-transform: uppercase; letter-spacing: 0.005em; }
+
+.check-list { display: flex; flex-direction: column; gap: 12px; }
+.check-list li {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.check-list li b { color: var(--ink); font-weight: 600; }
+.check-list li::before {
+  content: "✓";
+  flex-shrink: 0;
+  color: var(--accent);
+  font-weight: 700;
+  line-height: 1.55;
+}
+
 /* ---------- FOLLOW / MAILCHIMP ---------- */
 .follow { background: var(--ink); color: #fff; padding: clamp(56px, 8vw, 100px) clamp(28px, 6vw, 96px); }
 .follow-inner { max-width: 1080px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
@@ -277,5 +314,6 @@ h1 .accent { color: var(--accent); font-style: normal; }
   .socials { padding-top: 32px; }
   .stats { grid-template-columns: 1fr 1fr; }
   .kit-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
   .follow-inner { grid-template-columns: 1fr; }
 }
