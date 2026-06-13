@@ -128,25 +128,23 @@
 
     <!--
       ====================================================================
-      MAILCHIMP — AÇÃO NECESSÁRIA ANTES DE PUBLICAR
-      Substitua os 3 marcadores abaixo pelos valores do seu formulário
-      (Audience → Signup forms → Embedded form):
-        1) SEU-USUARIO  → seu subdomínio Mailchimp (ex: meuestudio.us20)
-        2) SEU_U_ID     → o parâmetro "u" da action do formulário
-        3) SEU_LIST_ID  → o parâmetro "id" (sua lista/audience)
-      O mesmo SEU_U_ID e SEU_LIST_ID também aparecem no "name" do campo
-      honeypot abaixo (b_SEU_U_ID_SEU_LIST_ID) — troque os dois juntos.
+      MAILCHIMP — formulário conectado à audiência "passmail"
+      (action e honeypot preenchidos a partir do link de inscrição
+      http://eepurl.com/EoUuY-a-gf · u=f12f3831f26f50e024aed05ec,
+      id=c60f7acef4). Se você recriar a audiência ou trocar de conta,
+      gere um novo "Embedded form" em Audience → Signup forms e
+      atualize a action + o name do campo honeypot abaixo juntos.
       ====================================================================
     -->
     <form class="follow-form"
-          action="https://SEU-USUARIO.us20.list-manage.com/subscribe/post?u=SEU_U_ID&amp;id=SEU_LIST_ID"
+          action="https://github.us20.list-manage.com/subscribe/post?u=f12f3831f26f50e024aed05ec&amp;id=c60f7acef4"
           method="post" target="_blank" rel="noopener" novalidate>
       <div class="ff-row">
         <input type="text" name="FNAME" placeholder="Seu nome" aria-label="Nome" />
         <input type="email" name="EMAIL" placeholder="seu@email.com" required aria-label="E-mail" />
       </div>
-      <!-- anti-bot honeypot — troque o name por b_SEU_U_ID_SEU_LIST_ID (mesmos valores usados acima) -->
-      <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_SEU_U_ID_SEU_LIST_ID" tabindex="-1" value="" /></div>
+      <!-- anti-bot honeypot: deve ficar vazio -->
+      <div aria-hidden="true" style="position:absolute;left:-5000px"><input type="text" name="b_f12f3831f26f50e024aed05ec_c60f7acef4" tabindex="-1" value="" /></div>
       <button type="submit" name="subscribe" class="btn btn--accent follow-btn">Quero acompanhar</button>
       <span class="follow-note">Ao se inscrever você concorda em receber e-mails. Powered by Mailchimp.</span>
     </form>
