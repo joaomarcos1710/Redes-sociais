@@ -158,7 +158,7 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .kit-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 4.4vw, 4rem); line-height: 0.96; letter-spacing: 0.005em; text-transform: uppercase; margin-top: 22px; text-wrap: balance; }
 .kit-title .accent { color: var(--accent); font-style: normal; }
 
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
 .stat { background: var(--paper); padding: 28px 26px; }
 .stat .num { font-family: var(--display); font-weight: 400; font-size: clamp(2.8rem, 4.6vw, 3.9rem); line-height: 0.9; letter-spacing: 0.01em; text-transform: uppercase; }
 .stat .num span { font-size: 0.42em; vertical-align: super; color: var(--accent); margin-left: 2px; }
@@ -174,12 +174,6 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .plat-name { display: flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 600; }
 .plat-name img { width: 18px; height: 18px; opacity: .85; }
 .plat-status { font-size: 13px; color: var(--muted); }
-
-.highlight { margin-top: clamp(40px, 5vw, 64px); border-left: 2px solid var(--accent); padding: 6px 0 6px 24px; }
-.highlight .h-big { font-family: var(--sans); font-size: clamp(1.2rem, 2vw, 1.55rem); font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; max-width: 48ch; }
-.highlight .h-big em { font-style: italic; }
-.highlight .h-sub { margin-top: 14px; font-size: 14px; color: var(--muted); line-height: 1.6; }
-.highlight .h-sub b { color: var(--ink); font-weight: 600; }
 
 .kit-cta { margin-top: clamp(40px, 5vw, 60px); }
 
@@ -212,7 +206,7 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .svc-inner { max-width: 1080px; margin: 0 auto; }
 .svc-head { margin-bottom: clamp(36px, 4vw, 52px); }
 .svc-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(2.2rem, 3.6vw, 3.2rem); line-height: 0.98; letter-spacing: 0.01em; margin-top: 20px; }
-.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.svc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .svc-card { background: var(--paper); border: 1px solid var(--line); border-radius: 4px; padding: 32px 28px; display: flex; flex-direction: column; }
 .svc-num { font-family: var(--display); font-size: 1.6rem; color: var(--accent); line-height: 1; margin-bottom: 18px; }
 .svc-card h3 { font-family: var(--sans); font-weight: 700; font-size: 1.25rem; letter-spacing: -0.01em; margin-bottom: 10px; }
