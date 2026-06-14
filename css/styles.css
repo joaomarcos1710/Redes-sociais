@@ -175,6 +175,14 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .plat-name img { width: 18px; height: 18px; opacity: .85; }
 .plat-status { font-size: 13px; color: var(--muted); }
 
+.demo { display: flex; flex-direction: column; gap: 12px; }
+.demo-row { display: grid; grid-template-columns: 108px 1fr 46px; align-items: center; gap: 12px; }
+.demo-label { font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.demo-bar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+.demo-bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
+.demo-pct { font-size: 13px; font-weight: 600; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.demo-note { margin-top: 18px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
 .kit-cta { margin-top: clamp(40px, 5vw, 60px); }
 
 /* ---------- CALENDÁRIO ---------- */
