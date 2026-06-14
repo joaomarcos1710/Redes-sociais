@@ -158,7 +158,7 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .kit-title { font-family: var(--display); font-weight: 400; font-size: clamp(2.6rem, 4.4vw, 4rem); line-height: 0.96; letter-spacing: 0.005em; text-transform: uppercase; margin-top: 22px; text-wrap: balance; }
 .kit-title .accent { color: var(--accent); font-style: normal; }
 
-.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 3px; overflow: hidden; }
 .stat { background: var(--paper); padding: 28px 26px; }
 .stat .num { font-family: var(--display); font-weight: 400; font-size: clamp(2.8rem, 4.6vw, 3.9rem); line-height: 0.9; letter-spacing: 0.01em; text-transform: uppercase; }
 .stat .num span { font-size: 0.42em; vertical-align: super; color: var(--accent); margin-left: 2px; }
