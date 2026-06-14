@@ -175,13 +175,12 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .plat-name img { width: 18px; height: 18px; opacity: .85; }
 .plat-status { font-size: 13px; color: var(--muted); }
 
-.demo { display: flex; flex-direction: column; gap: 12px; }
-.demo-row { display: grid; grid-template-columns: 108px 1fr 46px; align-items: center; gap: 12px; }
-.demo-label { font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.demo-bar { height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
-.demo-bar span { display: block; height: 100%; background: var(--accent); border-radius: 999px; }
-.demo-pct { font-size: 13px; font-weight: 600; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
-.demo-note { margin-top: 18px; font-size: 13px; color: var(--muted); line-height: 1.5; }
+.mini-table { width: 100%; border-collapse: collapse; }
+.mini-table tr { border-bottom: 1px solid var(--line); }
+.mini-table tr:last-child { border-bottom: none; }
+.mini-table th, .mini-table td { padding: 12px 0; font-size: 14px; font-weight: 400; text-align: left; }
+.mini-table th { color: var(--muted); font-weight: 500; }
+.mini-table td { color: var(--ink); font-weight: 600; text-align: right; }
 
 .kit-cta { margin-top: clamp(40px, 5vw, 60px); }
 
