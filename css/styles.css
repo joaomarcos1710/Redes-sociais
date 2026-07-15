@@ -226,11 +226,7 @@ h1 .accent { color: var(--accent); font-style: normal; }
 .follow-title { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: clamp(1.9rem, 3vw, 2.8rem); line-height: 1.0; letter-spacing: 0.01em; color: #fff; margin: 22px 0 16px; }
 .follow-title .accent { color: var(--accent); }
 .follow-sub { color: rgba(255,255,255,0.6); font-size: 15px; line-height: 1.6; max-width: 36ch; }
-.follow-form { display: flex; flex-direction: column; gap: 14px; }
-.ff-row { display: flex; gap: 12px; flex-wrap: wrap; }
-.follow-form input { flex: 1; min-width: 170px; background: transparent; border: 1px solid rgba(255,255,255,0.28); border-radius: 2px; padding: 16px; color: #fff; font-family: var(--sans); font-size: 15px; transition: border-color .2s ease; }
-.follow-form input::placeholder { color: rgba(255,255,255,0.45); }
-.follow-form input:focus { outline: none; border-color: #fff; }
+.follow-action { display: flex; flex-direction: column; gap: 14px; }
 .btn--accent { background: var(--accent); color: #fff; border: 1.5px solid var(--accent); justify-content: center; }
 .btn--accent:hover { background: #C72A16; border-color: #C72A16; }
 .follow-btn { width: 100%; }
