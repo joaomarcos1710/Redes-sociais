@@ -655,16 +655,23 @@ const PLAT = {
   },
   tt: {
     label: 'TikTok — Seguidores',
-    kpi: ['2.200','10,3<sup>mil</sup>','489<sup>+</sup>','109'],
-    kpiLabels: ['Seguidores','Views (28d)','Interações','Visitas perfil'],
-    kpiDeltas: ['+90 vs junho','−4,9% vs jun','Curtidas+compart.','−10,7% vs jun'],
-    kpiNeg: [false,true,false,true],
+    kpi: ['2.200','10,3<sup>mil</sup>','489<sup>+</sup>','56<sup>+300%</sup>'],
+    kpiLabels: ['Seguidores','Views (28d)','Interações','Compartilhamentos'],
+    kpiDeltas: ['+90 vs junho','−4,9% vs jun','418 curt.+15 com.+56 comp.','viral fora da base'],
+    kpiNeg: [false,true,false,false],
     barJun: 2110, barJul: 2200, barLabel: 'Seguidores',
     barMax: 2200,
+    audience: {
+      gender: [{l:'Masculino',v:55.6},{l:'Feminino',v:44.4}],
+      age: [{l:'18-24',v:19.98},{l:'25-34',v:38.11},{l:'35-44',v:21.85},{l:'45-54',v:11.2},{l:'55+',v:8.86}],
+      regions: [{l:'São Paulo',v:22.28},{l:'Minas Gerais',v:9.69},{l:'Rio de Janeiro',v:8.20}],
+      os: [{l:'Android',v:77.51},{l:'iOS',v:21.69}],
+      engagement: '149 views/usuário/dia · 42 min/dia no app · 100% Brasil'
+    },
     topPost: {
       platform: 'TikTok',
       icon: 'https://cdn.simpleicons.org/tiktok/EE1D52',
-      text: 'Compartilhamentos explodiram +300% — conteúdo circulando fora da base.',
+      text: 'Compartilhamentos explodiram +300% — conteúdo circulando fora da base. Público 55,6% masculino · 25-34 anos lidera (38%).',
       stats: [{v:'418',l:'Curtidas'},{v:'56',l:'Compart.'},{v:'10,3k',l:'Views'}]
     }
   },
@@ -768,7 +775,41 @@ function drawBarChart(platKey) {
   svg.innerHTML = gridLines + barJun + barJul + deltaLabel;
 }
 
-function renderTopPost(post) {
+function renderAudienceBar(label, pct, color) {
+  return `<div style="margin-bottom:8px">
+    <div style="display:flex;justify-content:space-between;font-size:11px;margin-bottom:3px">
+      <span style="color:var(--text-muted)">${label}</span>
+      <span style="font-weight:600">${pct}%</span>
+    </div>
+    <div style="height:5px;background:var(--border);border-radius:3px;overflow:hidden">
+      <div style="height:100%;width:${pct}%;background:${color};border-radius:3px"></div>
+    </div>
+  </div>`;
+}
+
+function renderTopPost(post, audience) {
+  const audienceHtml = audience ? `
+    <div style="margin-top:16px;padding-top:16px;border-top:1px solid var(--border)">
+      <div class="da-tp-eyebrow" style="margin-bottom:10px">Público (TikTok Ads Audience Insights)</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Gênero</div>
+          ${audience.gender.map(g=>renderAudienceBar(g.l, g.v, g.l==='Masculino'?'#3B82F6':'#EC4899')).join('')}
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Idade</div>
+          ${audience.age.map(a=>renderAudienceBar(a.l, a.v.toFixed(1), '#E5341E')).join('')}
+        </div>
+      </div>
+      <div style="margin-top:12px">
+        <div style="font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px">Top estados</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          ${audience.regions.map(r=>`<span style="font-size:11px;background:var(--surface-2,#f5f5f5);padding:3px 8px;border-radius:4px">${r.l} <strong>${r.v}%</strong></span>`).join('')}
+        </div>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:var(--text-muted)">${audience.engagement}</div>
+    </div>` : '';
+
   document.getElementById('da-top-post').innerHTML = `
     <div class="da-tp-eyebrow">Melhor performance · ${post.platform}</div>
     <div class="da-tp-card">
@@ -777,6 +818,7 @@ function renderTopPost(post) {
       <div class="da-tp-stats">
         ${post.stats.map(s=>`<div class="da-tp-stat"><div class="tv">${s.v}</div><div class="tl">${s.l}</div></div>`).join('')}
       </div>
+      ${audienceHtml}
     </div>
   `;
 }
@@ -789,7 +831,7 @@ function switchPlatform(key, btn) {
   const d = PLAT[key];
   document.getElementById('da-chart-title').textContent = d.label;
   drawBarChart(key);
-  renderTopPost(d.topPost);
+  renderTopPost(d.topPost, d.audience || null);
 
   for (let i = 0; i < 4; i++) {
     document.getElementById('da-k'+i).innerHTML = d.kpi[i];
@@ -802,7 +844,7 @@ function switchPlatform(key, btn) {
 
 function initChart() {
   drawBarChart('ig');
-  renderTopPost(PLAT.ig.topPost);
+  renderTopPost(PLAT.ig.topPost, null);
 }
 </script>
 </body>
