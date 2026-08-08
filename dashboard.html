@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>João Marcos — Analytics Dashboard</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=League+Gothic&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --ink: #0E0E0E;
+  --paper: #FFFFFF;
+  --off: #F5F4F2;
+  --accent: #E5341E;
+  --accent-pale: #FBE2DE;
+  --line: #E4E4E2;
+  --muted: #6B6B68;
+  --display: 'League Gothic', sans-serif;
+  --sans: 'Hanken Grotesk', system-ui, sans-serif;
+  --bg: var(--paper);
+  --surface: var(--off);
+  --text: var(--ink);
+  --text-muted: var(--muted);
+  --border: var(--line);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111110;
+    --surface: #1A1A18;
+    --text: #F0EFED;
+    --text-muted: #8A8A86;
+    --border: #2A2A28;
+    --paper: #111110;
+    --off: #1A1A18;
+    --ink: #F0EFED;
+    --line: #2A2A28;
+    --muted: #8A8A86;
+    --accent-pale: #3D1410;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111110;
+  --surface: #1A1A18;
+  --text: #F0EFED;
+  --text-muted: #8A8A86;
+  --border: #2A2A28;
+  --paper: #111110;
+  --off: #1A1A18;
+  --ink: #F0EFED;
+  --line: #2A2A28;
+  --muted: #8A8A86;
+  --accent-pale: #3D1410;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);-webkit-font-smoothing:antialiased}
+
+/* HEADER */
+.hd{
+  position:sticky;top:0;z-index:100;
+  background:var(--bg);border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,4vw,56px);height:56px;
+}
+.hd-logo{font-family:var(--display);font-size:1.35rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text)}
+.hd-logo span{color:var(--accent)}
+.hd-right{display:flex;align-items:center;gap:20px}
+.hd-tag{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.hd-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:7px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+.hd-date{font-size:12px;color:var(--text-muted);font-weight:500}
+
+/* HERO BAR */
+.hero{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:clamp(28px,4vw,44px) clamp(20px,4vw,56px);
+}
+.hero-eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.hero-eyebrow::before{content:'';width:22px;height:1px;background:var(--text-muted)}
+.hero-title{font-family:var(--display);font-size:clamp(2.4rem,5vw,4.2rem);font-weight:400;text-transform:uppercase;line-height:.95;letter-spacing:.01em;text-wrap:balance}
+.hero-title .acc{color:var(--accent)}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:4px;overflow:hidden;margin-top:32px}
+.kpi{background:var(--bg);padding:22px 20px;cursor:default}
+.kpi .k-val{font-family:var(--display);font-size:clamp(1.9rem,3.2vw,2.8rem);font-weight:400;text-transform:uppercase;line-height:.9;letter-spacing:.01em;font-variant-numeric:tabular-nums}
+.kpi .k-val sup{font-size:.38em;vertical-align:super;color:var(--accent);margin-left:2px}
+.kpi .k-label{font-size:12px;color:var(--text-muted);margin-top:9px;line-height:1.35}
+.kpi .k-delta{font-size:11px;font-weight:600;margin-top:6px;color:var(--accent)}
+.kpi .k-delta.neg{color:var(--text-muted)}
+
+/* PLATFORM SWITCHER */
+.switcher-wrap{padding:clamp(20px,3vw,36px) clamp(20px,4vw,56px) 0}
+.switcher-label{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px}
+.switcher{display:flex;gap:8px;flex-wrap:wrap}
+.sw-btn{
+  font-family:var(--sans);font-size:13px;font-weight:600;
+  padding:9px 18px;border-radius:2px;cursor:pointer;
+  border:1px solid var(--border);background:var(--bg);color:var(--text-muted);
+  display:inline-flex;align-items:center;gap:8px;
+  transition:border-color .15s,color .15s,background .15s;
+  letter-spacing:.01em;
+}
+.sw-btn img{width:15px;height:15px;opacity:.6;transition:opacity .15s;filter:var(--icon-filter,none)}
+.sw-btn.active{border-color:var(--ink);color:var(--text);background:var(--surface)}
+.sw-btn.active img{opacity:1}
+.sw-btn:hover:not(.active){border-color:var(--text-muted);color:var(--text)}
+
+/* MAIN GRID */
+.main{display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:20px clamp(20px,4vw,56px) clamp(28px,4vw,48px)}
+@media(max-width:860px){.main{grid-template-columns:1fr}}
+
+/* PANEL */
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:4px;overflow:hidden}
+.panel-head{padding:20px 22px 0;display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.panel-title{font-size:11px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--text-muted)}
+.panel-sub{font-size:12px;color:var(--text-muted)}
+
+/* GROWTH CHART */
+.chart-wrap{padding:20px 22px 22px;position:relative}
+.chart-legend{display:flex;gap:18px;margin-bottom:14px;flex-wrap:wrap}
+.leg-item{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:500;color:var(--text-muted)}
+.leg-dot{width:8px;height:8px;border-radius:50%;flex:none}
+.leg-dot.acc{background:var(--accent)}
+.leg-dot.prev{background:var(--border)}
+.chart-svg{width:100%;height:200px;display:block;overflow:visible}
+.chart-axis{font-family:var(--sans);font-size:10px;fill:var(--text-muted)}
+
+/* TOP POST */
+.top-post{padding:20px 22px}
+.tp-eyebrow{font-size:10px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--text-muted);margin-bottom:14px}
+.tp-card{border:1px solid var(--border);border-radius:3px;padding:16px;background:var(--bg)}
+.tp-platform{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.tp-platform img{width:12px;height:12px;opacity:.85}
+.tp-text{font-size:14px;font-weight:500;line-height:1.45;color:var(--text);margin-bottom:14px}
+.tp-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:2px;overflow:hidden}
+.tp-stat{background:var(--surface);padding:10px 10px 8px;text-align:center}
+.tp-stat .tv{font-family:var(--display);font-size:1.3rem;text-transform:uppercase;line-height:1;font-variant-numeric:tabular-nums;color:var(--text)}
+.tp-stat .tl{font-size:10px;color:var(--text-muted);margin-top:4px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+
+/* BOTTOM GRID */
+.bottom{display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:0 clamp(20px,4vw,56px) clamp(32px,4vw,56px)}
+@media(max-width:640px){.bottom{grid-template-columns:1fr}}
+
+/* SPARKLINES */
+.spark-list{padding:0 22px 18px;display:flex;flex-direction:column;gap:0}
+.spark-row{display:grid;grid-template-columns:1fr 80px 60px;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--border)}
+.spark-row:last-child{border-bottom:none}
+.spark-label{font-size:13px;font-weight:600;color:var(--text)}
+.spark-sub{font-size:11px;color:var(--text-muted);margin-top:2px;font-weight:400}
+.spark-val{font-family:var(--display);font-size:1.35rem;text-transform:uppercase;text-align:right;letter-spacing:.01em;font-variant-numeric:tabular-nums;line-height:1;color:var(--text)}
+.spark-svg{width:80px;height:30px;display:block}
+
+/* COMMENTS */
+.comment-list{padding:0 22px 18px;display:flex;flex-direction:column;gap:0}
+.c-row{padding:14px 0;border-bottom:1px solid var(--border)}
+.c-row:last-child{border-bottom:none}
+.c-meta{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.c-platform{font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.c-views{font-size:11px;color:var(--text-muted);font-weight:500}
+.c-text{font-size:13.5px;color:var(--text);line-height:1.45;font-weight:500}
+.c-author{font-size:11px;color:var(--text-muted);margin-top:5px}
+
+/* FOOTER */
+.dash-foot{border-top:1px solid var(--border);padding:20px clamp(20px,4vw,56px);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+.dash-foot span{font-size:12px;color:var(--text-muted)}
+.dash-foot a{font-size:12px;color:var(--text-muted);text-decoration:none}
+.dash-foot a:hover{color:var(--text)}
+
+/* icon filter for dark */
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]) .sw-btn img,
+  :root:not([data-theme="light"]) .tp-platform img{filter:invert(1) opacity(.7)}
+  :root:not([data-theme="light"]) .sw-btn.active img{filter:invert(1) opacity(1)}
+}
+:root[data-theme="dark"] .sw-btn img,
+:root[data-theme="dark"] .tp-platform img{filter:invert(1) opacity(.7)}
+:root[data-theme="dark"] .sw-btn.active img{filter:invert(1) opacity(1)}
+
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hd" data-od-id="header">
+  <a class="hd-logo" href="index.html" style="text-decoration:none">João <span>Marcos</span></a>
+  <div class="hd-right">
+    <span class="hd-tag"><span class="hd-dot"></span>Analytics · Mídia Kit</span>
+    <span class="hd-date">Ago 2026</span>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" data-od-id="hero">
+  <div class="hero-eyebrow">Visão consolidada · últimos 30 dias</div>
+  <h1 class="hero-title">4.685 pessoas <span class="acc">acompanham</span><br>a jornada.</h1>
+  <div class="kpi-row" id="kpi-row">
+    <div class="kpi">
+      <div class="k-val" id="kpi-seg">4.685<sup>+</sup></div>
+      <div class="k-label">Seguidores combinados</div>
+      <div class="k-delta">+580 vs junho</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val" id="kpi-views">85,3<sup>mil</sup></div>
+      <div class="k-label">Visualizações (30d)</div>
+      <div class="k-delta neg">combinado todas plataformas</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val" id="kpi-eng">4.942<sup>+</sup></div>
+      <div class="k-label">Interações totais</div>
+      <div class="k-delta">IG + TikTok + Threads</div>
+    </div>
+    <div class="kpi">
+      <div class="k-val" id="kpi-reach">30,4<sup>mil</sup></div>
+      <div class="k-label">Contas alcançadas</div>
+      <div class="k-delta">56,7% não-seguidores</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SWITCHER -->
+<div class="switcher-wrap" data-od-id="switcher">
+  <div class="switcher-label">Onde estou</div>
+  <div class="switcher">
+    <button class="sw-btn active" data-platform="ig" onclick="switchPlatform('ig',this)">
+      <img src="https://cdn.simpleicons.org/instagram/0E0E0E" alt=""/>Instagram
+    </button>
+    <button class="sw-btn" data-platform="tt" onclick="switchPlatform('tt',this)">
+      <img src="https://cdn.simpleicons.org/tiktok/0E0E0E" alt=""/>TikTok
+    </button>
+    <button class="sw-btn" data-platform="th" onclick="switchPlatform('th',this)">
+      <img src="https://cdn.simpleicons.org/threads/0E0E0E" alt=""/>Threads
+    </button>
+    <button class="sw-btn" data-platform="sub" onclick="switchPlatform('sub',this)">
+      <img src="https://cdn.simpleicons.org/substack/0E0E0E" alt=""/>Substack
+    </button>
+  </div>
+</div>
+
+<!-- MAIN 2/3 + 1/3 -->
+<div class="main" data-od-id="main-grid">
+
+  <!-- GROWTH CHART -->
+  <div class="panel" data-od-id="chart-panel">
+    <div class="panel-head">
+      <span class="panel-title" id="chart-title">Instagram — Crescimento de seguidores</span>
+      <span class="panel-sub" id="chart-period">Jun → Jul 2026</span>
+    </div>
+    <div class="chart-wrap">
+      <div class="chart-legend">
+        <span class="leg-item"><span class="leg-dot acc"></span>Jul 2026</span>
+        <span class="leg-item"><span class="leg-dot prev"></span>Jun 2026</span>
+      </div>
+      <!-- SVG chart rendered by JS -->
+      <svg class="chart-svg" id="growth-svg" viewBox="0 0 560 200" preserveAspectRatio="none"></svg>
+    </div>
+  </div>
+
+  <!-- TOP POST -->
+  <div class="panel" data-od-id="top-post">
+    <div class="panel-head">
+      <span class="panel-title">Post em destaque</span>
+    </div>
+    <div class="top-post" id="top-post-content">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- BOTTOM 1/2 + 1/2 -->
+<div class="bottom" data-od-id="bottom-grid">
+
+  <!-- SPARKLINES -->
+  <div class="panel" data-od-id="sparklines">
+    <div class="panel-head" style="padding-bottom:16px">
+      <span class="panel-title">Plataformas · Seguidores</span>
+      <span class="panel-sub">Jul 2026</span>
+    </div>
+    <div class="spark-list">
+      <div class="spark-row">
+        <div><div class="spark-label">Instagram</div><div class="spark-sub">+23 vs jun</div></div>
+        <svg class="spark-svg" viewBox="0 0 80 30">
+          <defs><linearGradient id="g1" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#E5341E" stop-opacity=".25"/><stop offset="100%" stop-color="#E5341E" stop-opacity="0"/></linearGradient></defs>
+          <polyline points="0,26 13,24 26,22 39,20 52,17 65,15 80,13" fill="none" stroke="#E5341E" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="13" r="3" fill="#E5341E"/>
+        </svg>
+        <div class="spark-val">1.023</div>
+      </div>
+      <div class="spark-row">
+        <div><div class="spark-label">TikTok</div><div class="spark-sub">+90 vs jun</div></div>
+        <svg class="spark-svg" viewBox="0 0 80 30">
+          <polyline points="0,24 13,22 26,20 39,17 52,14 65,12 80,9" fill="none" stroke="#E5341E" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="9" r="3" fill="#E5341E"/>
+        </svg>
+        <div class="spark-val">2.200</div>
+      </div>
+      <div class="spark-row">
+        <div><div class="spark-label">Threads</div><div class="spark-sub">−5 vs jun</div></div>
+        <svg class="spark-svg" viewBox="0 0 80 30">
+          <polyline points="0,10 13,11 26,12 39,13 52,13 65,14 80,15" fill="none" stroke="#6B6B68" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="15" r="3" fill="#6B6B68"/>
+        </svg>
+        <div class="spark-val" style="color:var(--text-muted)">990</div>
+      </div>
+      <div class="spark-row">
+        <div><div class="spark-label">Substack</div><div class="spark-sub">novo canal</div></div>
+        <svg class="spark-svg" viewBox="0 0 80 30">
+          <polyline points="0,28 13,26 26,22 39,18 52,13 65,9 80,5" fill="none" stroke="#E5341E" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="5" r="3" fill="#E5341E"/>
+        </svg>
+        <div class="spark-val">472</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP THREADS POSTS -->
+  <div class="panel" data-od-id="top-comments">
+    <div class="panel-head" style="padding-bottom:16px">
+      <span class="panel-title">Threads · Top conteúdo</span>
+      <span class="panel-sub">Jul 2026</span>
+    </div>
+    <div class="comment-list">
+      <div class="c-row">
+        <div class="c-meta"><span class="c-platform"><img src="https://cdn.simpleicons.org/threads/0E0E0E" alt="" style="width:11px;height:11px;vertical-align:middle;margin-right:4px"/>Threads</span><span class="c-views">484 views</span></div>
+        <div class="c-text">"Parece que o AirFrance Paris-Rio AFR-442 teve desvio de rota."</div>
+        <div class="c-author">3 curtidas · 2 comentários</div>
+      </div>
+      <div class="c-row">
+        <div class="c-meta"><span class="c-platform"><img src="https://cdn.simpleicons.org/threads/0E0E0E" alt="" style="width:11px;height:11px;vertical-align:middle;margin-right:4px"/>Threads</span><span class="c-views">299 views</span></div>
+        <div class="c-text">"Eu adoro quando um livro me faz parar de ler por cinco minutos só pra pensar..."</div>
+        <div class="c-author">4 curtidas</div>
+      </div>
+      <div class="c-row">
+        <div class="c-meta"><span class="c-platform"><img src="https://cdn.simpleicons.org/threads/0E0E0E" alt="" style="width:11px;height:11px;vertical-align:middle;margin-right:4px"/>Threads</span><span class="c-views">208 views</span></div>
+        <div class="c-text">"Eu preciso estar com Deus"</div>
+        <div class="c-author">8 curtidas · tendência em 7h</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="dash-foot">
+  <span>João Marcos · @bomfim1710 · Dados: 31/07/2026</span>
+  <a href="index.html">← Voltar ao Mídia Kit</a>
+</footer>
+
+<script>
+const PLATFORMS = {
+  ig: {
+    label: 'Instagram — Crescimento de seguidores',
+    period: 'Jun → Jul 2026',
+    // monthly data points (seg, views, eng, reach)
+    kpi: ['1.023','59,5<sup>mil</sup>','4.145<sup>+</sup>','30,4<sup>mil</sup>'],
+    kpiLabels: ['Seguidores','Views (30d)','Interações','Alcance'],
+    kpiDeltas: ['+23 vs junho','Reels 74,4%','−1.367 vs jun','56,7% não-seg'],
+    kpiDeltaNeg: [false,true,true,false],
+    // chart: Jun vs Jul points for area chart (normalized 0–100)
+    chartJun: [0,18,32,44,55,66,76,85,92,96,100],
+    chartJul: [0,20,38,52,63,72,80,87,93,97,100],
+    topPost: {
+      platform:'Instagram',
+      icon:'https://cdn.simpleicons.org/instagram/0E0E0E',
+      text:'Reel de treino — 4 de julho',
+      stats:[{v:'231',l:'Interações'},{v:'59,5k',l:'Views'},{v:'4.145',l:'Eng. total'}]
+    }
+  },
+  tt: {
+    label: 'TikTok — Visualizações de vídeo',
+    period: 'Jun → Jul 2026',
+    kpi: ['2.200','10,3<sup>mil</sup>','489<sup>+</sup>','109<sup>+</sup>'],
+    kpiLabels: ['Seguidores','Views (28d)','Interações','Visitas perfil'],
+    kpiDeltas: ['+90 vs junho','−4,9% vs jun','Curtidas + compart.','−10,7% vs jun'],
+    kpiDeltaNeg: [false,true,false,true],
+    chartJun: [0,15,28,40,54,65,75,83,90,95,100],
+    chartJul: [0,14,26,38,51,63,72,80,88,94,100],
+    topPost: {
+      platform:'TikTok',
+      icon:'https://cdn.simpleicons.org/tiktok/0E0E0E',
+      text:'Compartilhamentos explodiram +300% — conteúdo circulando fora da base de seguidores.',
+      stats:[{v:'418',l:'Curtidas'},{v:'56',l:'Compart.'},{v:'10,3k',l:'Views'}]
+    }
+  },
+  th: {
+    label: 'Threads — Visualizações totais',
+    period: 'Jun → Jul 2026',
+    kpi: ['990','15,5<sup>mil</sup>','308<sup>+</sup>','4<sup>mil</sup>'],
+    kpiLabels: ['Seguidores','Views (30d)','Interações','Crescimento views'],
+    kpiDeltas: ['−5 vs junho','+35% vs jun','308 no período','+4 mil vs jun'],
+    kpiDeltaNeg: [true,false,false,false],
+    chartJun: [0,12,25,37,50,62,72,80,87,93,100],
+    chartJul: [0,16,32,47,60,72,82,89,94,98,100],
+    topPost: {
+      platform:'Threads',
+      icon:'https://cdn.simpleicons.org/threads/0E0E0E',
+      text:'"Parece que o AirFrance Paris-Rio AFR-442 teve desvio de rota."',
+      stats:[{v:'484',l:'Views'},{v:'3',l:'Curtidas'},{v:'2',l:'Comentários'}]
+    }
+  },
+  sub: {
+    label: 'Substack — Crescimento de assinantes',
+    period: 'Estreia 2026',
+    kpi: ['472','—','—','23.500<sup>%</sup>'],
+    kpiLabels: ['Assinantes','Receita','Monetização','Crescimento relativo'],
+    kpiDeltas: ['de 2 → 472','sem ativa ainda','em breve','saída do zero'],
+    kpiDeltaNeg: [false,true,true,false],
+    chartJun: [0,0,0,0,2,8,18,32,52,72,100],
+    chartJul: [0,5,14,28,44,58,70,80,89,95,100],
+    topPost: {
+      platform:'Substack',
+      icon:'https://cdn.simpleicons.org/substack/0E0E0E',
+      text:'Canal mais novo da operação. 472 assinantes no primeiro ciclo completo — maior crescimento relativo de todos os canais.',
+      stats:[{v:'472',l:'Assinantes'},{v:'+23.5k%',l:'Crescimento'},{v:'—',l:'Receita'}]
+    }
+  }
+};
+
+function drawChart(jun, jul) {
+  const svg = document.getElementById('growth-svg');
+  const W = 560, H = 200, PL = 36, PR = 12, PT = 12, PB = 28;
+  const cw = W - PL - PR, ch = H - PT - PB;
+  const n = jun.length;
+  const pts = (arr) => arr.map((v,i)=>`${PL + i*(cw/(n-1))},${PT + ch - (v/100)*ch}`).join(' ');
+
+  // area under jul
+  const julPts = PLATFORMS[currentPlatform].chartJul;
+  const firstX = PL, lastX = PL + cw;
+  const firstY = PT + ch - (julPts[0]/100)*ch;
+  const lastY  = PT + ch - (julPts[julPts.length-1]/100)*ch;
+  const areaPath = `M${firstX},${PT+ch} L${pts(julPts).split(' ').map((p,i)=>p).join(' L')} L${lastX},${PT+ch} Z`.replace('M','M').replace(/L(\d)/g,'L$1');
+
+  // axis labels
+  const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov'];
+  const axisLabels = Array.from({length:n}, (_,i)=>{
+    const x = PL + i*(cw/(n-1));
+    const lbl = months[i+1] || '';
+    return `<text x="${x}" y="${H-6}" text-anchor="middle" class="chart-axis">${lbl}</text>`;
+  }).join('');
+
+  svg.innerHTML = `
+    <defs>
+      <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0%" stop-color="#E5341E" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#E5341E" stop-opacity="0.02"/>
+      </linearGradient>
+    </defs>
+    <!-- grid lines -->
+    ${[0,25,50,75,100].map(v=>{
+      const y = PT + ch - (v/100)*ch;
+      return `<line x1="${PL}" y1="${y}" x2="${PL+cw}" y2="${y}" stroke="var(--border)" stroke-width="1"/>`;
+    }).join('')}
+    <!-- Jun area (faint) -->
+    <polyline points="${pts(jun)}" fill="none" stroke="var(--border)" stroke-width="1.5" stroke-dasharray="4 3" stroke-linejoin="round"/>
+    <!-- Jul area fill -->
+    <path d="M${PL},${PT+ch} L${pts(jul).split(' ').join(' L')} L${PL+cw},${PT+ch} Z" fill="url(#areaGrad)"/>
+    <!-- Jul line -->
+    <polyline points="${pts(jul)}" fill="none" stroke="#E5341E" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- endpoint dot -->
+    <circle cx="${PL+cw}" cy="${PT + ch - (jul[n-1]/100)*ch}" r="4" fill="#E5341E"/>
+    <!-- axis -->
+    ${axisLabels}
+  `;
+}
+
+function renderTopPost(post) {
+  const el = document.getElementById('top-post-content');
+  el.innerHTML = `
+    <div class="tp-eyebrow">Melhor performance · ${post.platform}</div>
+    <div class="tp-card">
+      <div class="tp-platform"><img src="${post.icon}" alt=""/> ${post.platform}</div>
+      <div class="tp-text">${post.text}</div>
+      <div class="tp-stats">
+        ${post.stats.map(s=>`<div class="tp-stat"><div class="tv">${s.v}</div><div class="tl">${s.l}</div></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+let currentPlatform = 'ig';
+
+function switchPlatform(key, btn) {
+  currentPlatform = key;
+  document.querySelectorAll('.sw-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const d = PLATFORMS[key];
+  document.getElementById('chart-title').textContent = d.label;
+  document.getElementById('chart-period').textContent = d.period;
+  drawChart(d.chartJun, d.chartJul);
+  renderTopPost(d.topPost);
+
+  // update KPIs
+  const kpiRow = document.getElementById('kpi-row');
+  const kpis = kpiRow.querySelectorAll('.kpi');
+  const labels = ['Seguidores combinados','Visualizações (30d)','Interações totais','Contas alcançadas'];
+  d.kpi.forEach((v,i)=>{
+    kpis[i].querySelector('.k-val').innerHTML = v;
+    kpis[i].querySelector('.k-label').textContent = d.kpiLabels[i];
+    const delta = kpis[i].querySelector('.k-delta');
+    delta.textContent = d.kpiDeltas[i];
+    delta.className = 'k-delta' + (d.kpiDeltaNeg[i] ? ' neg' : '');
+  });
+}
+
+// init
+drawChart(PLATFORMS.ig.chartJun, PLATFORMS.ig.chartJul);
+renderTopPost(PLATFORMS.ig.topPost);
+</script>
+</body>
+</html>
