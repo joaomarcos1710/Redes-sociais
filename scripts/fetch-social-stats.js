@@ -23,11 +23,11 @@ if (!APIFY_TOKEN) {
 
 // ── helpers ──────────────────────────────────────────────────
 
-function apifyRequest(method, path, body) {
+function apifyRequest(method, path, body, extraQuery = '') {
   return new Promise((resolve, reject) => {
     const options = {
       hostname: 'api.apify.com',
-      path: `${path}?token=${APIFY_TOKEN}`,
+      path: `${path}?token=${APIFY_TOKEN}${extraQuery}`,
       method,
       headers: { 'Content-Type': 'application/json' },
     };
@@ -47,10 +47,13 @@ function apifyRequest(method, path, body) {
 
 async function runActor(actorId, input, timeoutSecs = 120) {
   console.log(`[apify] running ${actorId}...`);
-  const run = await apifyRequest('POST', `/v2/acts/${encodeURIComponent(actorId)}/runs`, {
+  // input goes directly as body; timeout is a query param
+  const run = await apifyRequest(
+    'POST',
+    `/v2/acts/${encodeURIComponent(actorId)}/runs`,
     input,
-    timeout: timeoutSecs,
-  });
+    `&timeout=${timeoutSecs}&memory=256`
+  );
   if (!run.data || !run.data.id) throw new Error(`Failed to start actor ${actorId}: ${JSON.stringify(run)}`);
 
   const runId = run.data.id;
@@ -111,8 +114,7 @@ async function fetchTikTok() {
 async function fetchThreads() {
   try {
     const items = await runActor('futurizerush/meta-threads-scraper', {
-      username: 'bomfim1710',
-      action: 'profile',
+      usernames: ['bomfim1710'],
       resultsLimit: 1,
     });
     const p = items[0];
