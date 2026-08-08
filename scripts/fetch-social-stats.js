@@ -74,7 +74,8 @@ async function runActor(actorId, input, timeoutSecs = 120) {
     console.log(`[apify] ${actorId} status: ${s} (${elapsed}s elapsed)`);
     if (s === 'SUCCEEDED') {
       const ds = await apifyRequest('GET', `/v2/actor-runs/${runId}/dataset/items`);
-      return ds.data?.items || [];
+      // API returns array directly OR wrapped in {data:{items:[]}}
+      return Array.isArray(ds) ? ds : (ds.data?.items || []);
     }
     if (s === 'FAILED' || s === 'ABORTED' || s === 'TIMED-OUT') {
       throw new Error(`Actor ${actorId} ended with status ${s}`);
@@ -104,12 +105,14 @@ async function fetchTikTok() {
       profiles: ['https://www.tiktok.com/@bomfim1710'],
       resultsType: 'profiles',
     });
-    const p = items[0];
-    if (!p) throw new Error('No TikTok data returned');
+    // Actor returns video items; profile data is in authorMeta of the first item
+    const first = items[0];
+    if (!first) throw new Error('No TikTok data returned');
+    const meta = first.authorMeta ?? first;
     return {
-      tt_seguidores: fmt(p.followers ?? p.followerCount),
-      tt_views: fmt(p.videoViews ?? p.totalVideoViews ?? 0),
-      _raw_tt: p,
+      tt_seguidores: fmt(meta.fans ?? meta.followers ?? meta.followerCount ?? 0),
+      tt_views: fmt(meta.heart ?? meta.videoViews ?? 0),
+      _raw_tt: meta,
     };
   } catch (e) {
     console.warn('[tiktok] error:', e.message);
@@ -123,11 +126,12 @@ async function fetchThreads() {
       usernames: ['bomfim1710'],
       resultsLimit: 1,
     });
-    const p = items[0];
-    if (!p) throw new Error('No Threads data returned');
+    // Actor returns posts, not profile — follower count unavailable via this actor
+    // Use manual snapshot value; just log posts for reference
+    console.log(`[threads] got ${items.length} posts, no follower count available`);
     return {
-      threads_seguidores: fmt(p.followerCount ?? p.followers ?? 0),
-      _raw_th: p,
+      threads_seguidores: 0, // must be filled manually from Threads app
+      _threads_posts_sample: items.slice(0,2).map(p => p.text_content?.slice(0,50)),
     };
   } catch (e) {
     console.warn('[threads] error:', e.message);
@@ -147,8 +151,9 @@ async function fetchYouTube() {
     const p = items[0];
     if (!p) throw new Error('No YouTube data returned');
     return {
-      yt_inscritos: fmt(p.subscriberCount ?? p.subscribers ?? 0),
-      yt_views: fmt(p.viewCount ?? p.views ?? 0),
+      yt_inscritos: fmt(p.numberOfSubscribers ?? p.subscriberCount ?? p.subscribers ?? 0),
+      yt_views: fmt(p.channelTotalViews ?? p.viewCount ?? p.views ?? 0),
+      yt_videos: fmt(p.channelTotalVideos ?? p.videoCount ?? 0),
       _raw_yt: p,
     };
   } catch (e) {
@@ -180,6 +185,7 @@ threads_seguidores: ${threads_seguidores}
 sub_inscritos: 0
 yt_inscritos: ${yt_inscritos}
 yt_views: ${yt_views}
+yt_videos: ${data.yt_videos || 0}
 ---
 
 ## 📅 ${date} — Snapshot mensal (gerado automaticamente via Apify)
