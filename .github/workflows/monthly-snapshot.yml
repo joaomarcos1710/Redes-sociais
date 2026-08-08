@@ -1,0 +1,50 @@
+name: Monthly Social Media Snapshot
+
+on:
+  schedule:
+    # Runs at 08:00 BRT (11:00 UTC) on the 1st of every month
+    - cron: '0 11 1 * *'
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Dry run (print data, do not commit)'
+        required: false
+        default: 'false'
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: claude/add-earnings-analysis-skill-83SZF
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch social stats via Apify
+        env:
+          APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+          YOUTUBE_CHANNEL: ${{ secrets.YOUTUBE_CHANNEL }}
+        run: node scripts/fetch-social-stats.js
+
+      - name: Show generated snapshot
+        run: |
+          echo "--- Generated snapshot ---"
+          cat data/snapshots/$(date +%Y-%m-%d).md
+
+      - name: Commit and push snapshot
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/snapshots/
+          git diff --cached --quiet && echo "No changes to commit" || \
+            git commit -m "chore(snapshot): auto snapshot $(date +%Y-%m-%d)"
+          git push origin claude/add-earnings-analysis-skill-83SZF
