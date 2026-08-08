@@ -273,6 +273,7 @@ a.plat-row:hover .plat-status { color: var(--ink); }
       <a class="soc" href="https://www.threads.com/@bomfim1710" target="_blank" rel="noopener" aria-label="Threads"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="Threads" /></a>
       <a class="soc" href="https://www.tiktok.com/@bomfim1710" target="_blank" rel="noopener" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="TikTok" /></a>
       <a class="soc" href="https://joaomarcosbomfim.substack.com/" target="_blank" rel="noopener" aria-label="Substack"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="Substack" /></a>
+      <a class="soc" href="https://www.youtube.com/@bomfim1710" target="_blank" rel="noopener" aria-label="YouTube"><img src="https://cdn.simpleicons.org/youtube/FF0000" alt="YouTube" /></a>
     </div>
   </section>
 
@@ -316,6 +317,7 @@ a.plat-row:hover .plat-status { color: var(--ink); }
           <a class="plat-row" href="https://www.tiktok.com/@bomfim1710" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="" />TikTok</span><span class="plat-status">Maior crescimento de seguidores</span></a>
           <a class="plat-row" href="https://www.threads.com/@bomfim1710" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="" />Threads</span><span class="plat-status">15,5 mil views · crescendo</span></a>
           <a class="plat-row" href="https://joaomarcosbomfim.substack.com/" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack</span><span class="plat-status">472 assinantes · newsletter</span></a>
+          <a class="plat-row" href="https://www.youtube.com/@bomfim1710" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/youtube/FF0000" alt="" />YouTube</span><span class="plat-status">Canal novo · em crescimento</span></a>
         </div>
       </div>
     </div>
@@ -496,6 +498,9 @@ a.plat-row:hover .plat-status { color: var(--ink); }
     </button>
     <button class="da-sw-btn" onclick="switchPlatform('sub',this)">
       <img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack
+    </button>
+    <button class="da-sw-btn" onclick="switchPlatform('yt',this)">
+      <img src="https://cdn.simpleicons.org/youtube/FF0000" alt="" />YouTube
     </button>
   </div>
 </div>
@@ -688,6 +693,21 @@ const PLAT = {
       icon: 'https://cdn.simpleicons.org/threads/1C1C1C',
       text: '"Parece que o AirFrance Paris-Rio AFR-442 teve desvio de rota."',
       stats: [{v:'484',l:'Views'},{v:'3',l:'Curtidas'},{v:'2',l:'Coment.'}]
+    }
+  },
+  yt: {
+    label: 'YouTube — Inscritos',
+    kpi: ['—','—','—','—'],
+    kpiLabels: ['Inscritos','Views totais','Vídeos','Engajamento'],
+    kpiDeltas: ['canal novo','em crescimento','em breve','em breve'],
+    kpiNeg: [false,false,false,false],
+    barJun: 0, barJul: 0, barLabel: 'Inscritos',
+    barMax: 100,
+    topPost: {
+      platform: 'YouTube',
+      icon: 'https://cdn.simpleicons.org/youtube/FF0000',
+      text: 'Canal recém-lançado em @bomfim1710 — dados serão coletados automaticamente via Apify a partir do próximo snapshot mensal.',
+      stats: [{v:'—',l:'Inscritos'},{v:'—',l:'Views'},{v:'—',l:'Vídeos'}]
     }
   },
   sub: {

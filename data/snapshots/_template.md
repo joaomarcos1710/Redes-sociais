@@ -8,6 +8,8 @@ tt_seguidores: 0
 tt_views: 0
 threads_seguidores: 0
 sub_inscritos: 0
+yt_inscritos: 0
+yt_views: 0
 ---
 
 ## 📝 Notas e Insights do Mês

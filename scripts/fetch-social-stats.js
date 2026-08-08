@@ -14,7 +14,7 @@
 const https = require('https');
 
 const APIFY_TOKEN = process.env.APIFY_TOKEN;
-const YOUTUBE_CHANNEL = process.env.YOUTUBE_CHANNEL || '';
+const YOUTUBE_CHANNEL = process.env.YOUTUBE_CHANNEL || 'https://www.youtube.com/@bomfim1710';
 
 if (!APIFY_TOKEN) {
   console.error('Missing APIFY_TOKEN');
