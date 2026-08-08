@@ -10,6 +10,15 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
 <style>
+/* ── SOCIAL ICONS: colored + white on hover ── */
+.soc img { transition: opacity .25s ease, filter .25s ease; }
+.soc:hover img { filter: brightness(0) invert(1) !important; opacity: 1; }
+
+/* ── ONDE EU ESTOU: rows as links ──────────── */
+a.plat-row { text-decoration: none; transition: background .15s; cursor: pointer; }
+a.plat-row:hover { background: var(--off, #F5F4F2); }
+a.plat-row:hover .plat-status { color: var(--ink); }
+
 /* ── SITE NAV ──────────────────────────────── */
 .site-nav {
   position: sticky; top: 0; z-index: 200;
@@ -259,11 +268,11 @@
     </div>
 
     <div class="socials">
-      <a class="soc" href="https://www.instagram.com/bomfim1710/" target="_blank" rel="noopener" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram/0E0E0E" alt="Instagram" /></a>
-      <a class="soc" href="https://www.strava.com/athletes/bomfim1710" target="_blank" rel="noopener" aria-label="Strava"><img src="https://cdn.simpleicons.org/strava/0E0E0E" alt="Strava" /></a>
-      <a class="soc" href="https://www.threads.com/@bomfim1710" target="_blank" rel="noopener" aria-label="Threads"><img src="https://cdn.simpleicons.org/threads/0E0E0E" alt="Threads" /></a>
-      <a class="soc" href="https://www.tiktok.com/@bomfim1710" target="_blank" rel="noopener" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok/0E0E0E" alt="TikTok" /></a>
-      <a class="soc" href="https://joaomarcosbomfim.substack.com/" target="_blank" rel="noopener" aria-label="Substack"><img src="https://cdn.simpleicons.org/substack/0E0E0E" alt="Substack" /></a>
+      <a class="soc" href="https://www.instagram.com/bomfim1710/" target="_blank" rel="noopener" aria-label="Instagram"><img src="https://cdn.simpleicons.org/instagram/C13584" alt="Instagram" /></a>
+      <a class="soc" href="https://www.strava.com/athletes/bomfim1710" target="_blank" rel="noopener" aria-label="Strava"><img src="https://cdn.simpleicons.org/strava/FC4C02" alt="Strava" /></a>
+      <a class="soc" href="https://www.threads.com/@bomfim1710" target="_blank" rel="noopener" aria-label="Threads"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="Threads" /></a>
+      <a class="soc" href="https://www.tiktok.com/@bomfim1710" target="_blank" rel="noopener" aria-label="TikTok"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="TikTok" /></a>
+      <a class="soc" href="https://joaomarcosbomfim.substack.com/" target="_blank" rel="noopener" aria-label="Substack"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="Substack" /></a>
     </div>
   </section>
 
@@ -303,10 +312,10 @@
       <div class="panel">
         <div class="plabel">Onde eu estou</div>
         <div class="plat">
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/instagram/C13584" alt="" />Instagram</span><span class="plat-status">Maior alcance — 59,5 mil views/mês</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="" />TikTok</span><span class="plat-status">Maior crescimento de seguidores</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="" />Threads</span><span class="plat-status">15,5 mil views · crescendo</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack</span><span class="plat-status">472 assinantes · newsletter</span></div>
+          <a class="plat-row" href="https://www.instagram.com/bomfim1710/" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/instagram/C13584" alt="" />Instagram</span><span class="plat-status">Maior alcance — 59,5 mil views/mês</span></a>
+          <a class="plat-row" href="https://www.tiktok.com/@bomfim1710" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="" />TikTok</span><span class="plat-status">Maior crescimento de seguidores</span></a>
+          <a class="plat-row" href="https://www.threads.com/@bomfim1710" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="" />Threads</span><span class="plat-status">15,5 mil views · crescendo</span></a>
+          <a class="plat-row" href="https://joaomarcosbomfim.substack.com/" target="_blank" rel="noopener"><span class="plat-name"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack</span><span class="plat-status">472 assinantes · newsletter</span></a>
         </div>
       </div>
     </div>
@@ -432,7 +441,7 @@
 </section>
 
 <footer class="site-footer">
-  <span>© 2026 João Marcos · Atleta de corrida, natação &amp; crossfit</span>
+  <span>© 2026 João Marcos · atleta amador de corrida e falo de fé</span>
   <a href="mailto:joaomarcosbomfim@icloud.com">joaomarcosbomfim@icloud.com</a>
 </footer>
 
