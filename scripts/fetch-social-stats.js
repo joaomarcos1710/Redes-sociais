@@ -46,17 +46,22 @@ function apifyRequest(method, path, body, extraQuery = '') {
 }
 
 async function runActor(actorId, input, timeoutSecs = 120) {
-  console.log(`[apify] running ${actorId}...`);
-  // input goes directly as body; timeout is a query param
+  // Apify URL format uses ~ as separator, not /
+  const urlId = actorId.replace('/', '~');
+  console.log(`[apify] starting ${actorId} (url: ${urlId})...`);
+  console.log(`[apify] input: ${JSON.stringify(input)}`);
+
   const run = await apifyRequest(
     'POST',
-    `/v2/acts/${encodeURIComponent(actorId)}/runs`,
+    `/v2/acts/${urlId}/runs`,
     input,
     `&timeout=${timeoutSecs}&memory=256`
   );
+  console.log(`[apify] start response: ${JSON.stringify(run).slice(0, 300)}`);
   if (!run.data || !run.data.id) throw new Error(`Failed to start actor ${actorId}: ${JSON.stringify(run)}`);
 
   const runId = run.data.id;
+  console.log(`[apify] run ID: ${runId}, initial status: ${run.data.status}`);
   const start = Date.now();
   const deadline = timeoutSecs * 1000 + 30000;
 
@@ -65,7 +70,8 @@ async function runActor(actorId, input, timeoutSecs = 120) {
     await sleep(8000);
     const status = await apifyRequest('GET', `/v2/actor-runs/${runId}`);
     const s = status.data?.status;
-    console.log(`[apify] ${actorId} status: ${s}`);
+    const elapsed = Math.round((Date.now() - start) / 1000);
+    console.log(`[apify] ${actorId} status: ${s} (${elapsed}s elapsed)`);
     if (s === 'SUCCEEDED') {
       const ds = await apifyRequest('GET', `/v2/actor-runs/${runId}/dataset/items`);
       return ds.data?.items || [];
