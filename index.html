@@ -9,8 +9,237 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="css/styles.css" />
+<style>
+/* ── SITE NAV ──────────────────────────────── */
+.site-nav {
+  position: sticky; top: 0; z-index: 200;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 clamp(20px, 4vw, 56px); height: 52px;
+}
+.nav-logo {
+  font-family: var(--display); font-size: 1.25rem;
+  letter-spacing: .04em; text-transform: uppercase; color: var(--ink);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-tabs { display: flex; gap: 4px; }
+.nav-tab {
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 7px 18px; border-radius: 2px; cursor: pointer;
+  border: 1.5px solid transparent; background: transparent;
+  color: var(--muted); letter-spacing: .01em;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.nav-tab.active {
+  border-color: var(--ink); background: var(--ink); color: var(--paper);
+}
+.nav-tab:hover:not(.active) { color: var(--ink); border-color: var(--line); }
+
+/* ── ANALYTICS VIEW ─────────────────────────── */
+#view-analytics {
+  --bg: var(--paper);
+  --surface: #F5F4F2;
+  --text: var(--ink);
+  --text-muted: var(--muted);
+  --border: var(--line);
+  --accent-pale: #FBE2DE;
+}
+
+/* hero */
+.da-hero {
+  background: var(--surface); border-bottom: 1px solid var(--border);
+  padding: clamp(28px,4vw,48px) clamp(20px,4vw,56px);
+}
+.da-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+}
+.da-eyebrow::before { content: ''; width: 22px; height: 1px; background: var(--muted); display: block; }
+.da-title {
+  font-family: var(--display); font-size: clamp(2.4rem,5vw,4rem);
+  font-weight: 400; text-transform: uppercase; line-height: .95;
+  letter-spacing: .01em; text-wrap: balance;
+}
+.da-title .acc { color: var(--accent); }
+
+/* kpi row */
+.da-kpi-row {
+  display: grid; grid-template-columns: repeat(4,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 4px;
+  overflow: hidden; margin-top: 28px;
+}
+.da-kpi { background: var(--bg); padding: 20px 18px; }
+.da-kval {
+  font-family: var(--display); font-size: clamp(1.8rem,3vw,2.6rem);
+  font-weight: 400; text-transform: uppercase; line-height: .9;
+  font-variant-numeric: tabular-nums;
+}
+.da-kval sup { font-size: .38em; vertical-align: super; color: var(--accent); margin-left: 2px; }
+.da-klabel { font-size: 12px; color: var(--text-muted); margin-top: 9px; line-height: 1.35; }
+.da-kdelta { font-size: 11px; font-weight: 600; margin-top: 5px; color: var(--accent); }
+.da-kdelta.neg { color: var(--text-muted); }
+
+/* switcher */
+.da-sw-wrap {
+  padding: clamp(20px,3vw,32px) clamp(20px,4vw,56px) 0;
+}
+.da-sw-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+}
+.da-switcher { display: flex; gap: 8px; flex-wrap: wrap; }
+.da-sw-btn {
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  padding: 9px 18px; border-radius: 2px; cursor: pointer;
+  border: 1px solid var(--border); background: var(--bg); color: var(--text-muted);
+  display: inline-flex; align-items: center; gap: 9px;
+  transition: border-color .15s, color .15s, background .15s;
+}
+.da-sw-btn img { width: 16px; height: 16px; display: block; }
+.da-sw-btn.active { border-color: var(--ink); color: var(--text); background: var(--surface); }
+.da-sw-btn:hover:not(.active) { border-color: var(--text-muted); color: var(--text); }
+
+/* main grid */
+.da-main {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
+  padding: 20px clamp(20px,4vw,56px) clamp(28px,4vw,48px);
+}
+@media(max-width:860px){ .da-main { grid-template-columns: 1fr; } }
+
+/* panel */
+.da-panel {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 4px; overflow: hidden;
+}
+.da-panel-head {
+  padding: 18px 20px 0;
+  display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+}
+.da-panel-title {
+  font-size: 11px; font-weight: 600; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+.da-panel-sub { font-size: 12px; color: var(--text-muted); }
+
+/* chart */
+.da-chart-wrap { padding: 18px 20px 20px; }
+.da-chart-legend {
+  display: flex; gap: 16px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.da-leg-item { display: flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 500; color: var(--text-muted); }
+.da-leg-dot { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+.da-leg-dot.cur { background: var(--accent); }
+.da-leg-dot.prev { background: var(--border); border: 1px solid var(--text-muted); }
+.da-chart-svg { width: 100%; display: block; overflow: visible; }
+
+/* top post */
+.da-top-post { padding: 18px 20px; }
+.da-tp-eyebrow {
+  font-size: 10px; font-weight: 600; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+}
+.da-tp-card {
+  border: 1px solid var(--border); border-radius: 3px;
+  padding: 14px; background: var(--bg);
+}
+.da-tp-plat {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 7px;
+  display: flex; align-items: center; gap: 6px;
+}
+.da-tp-plat img { width: 12px; height: 12px; }
+.da-tp-text {
+  font-size: 13.5px; font-weight: 500; line-height: 1.45;
+  color: var(--text); margin-bottom: 14px;
+}
+.da-tp-stats {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border);
+  border: 1px solid var(--border); border-radius: 2px; overflow: hidden;
+}
+.da-tp-stat { background: var(--surface); padding: 10px 8px 8px; text-align: center; }
+.da-tp-stat .tv {
+  font-family: var(--display); font-size: 1.25rem; text-transform: uppercase;
+  line-height: 1; font-variant-numeric: tabular-nums; color: var(--text);
+}
+.da-tp-stat .tl {
+  font-size: 10px; color: var(--text-muted); margin-top: 4px;
+  font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* bottom grid */
+.da-bottom {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  padding: 0 clamp(20px,4vw,56px) clamp(32px,4vw,56px);
+}
+@media(max-width:640px){ .da-bottom { grid-template-columns: 1fr; } }
+
+/* sparklines */
+.da-spark-list { padding: 0 20px 16px; }
+.da-spark-row {
+  display: grid; grid-template-columns: 1fr 80px 56px;
+  align-items: center; gap: 12px; padding: 13px 0;
+  border-bottom: 1px solid var(--border);
+}
+.da-spark-row:last-child { border-bottom: none; }
+.da-spark-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.da-spark-sub { font-size: 11px; color: var(--text-muted); margin-top: 2px; }
+.da-spark-val {
+  font-family: var(--display); font-size: 1.3rem; text-transform: uppercase;
+  text-align: right; font-variant-numeric: tabular-nums; line-height: 1; color: var(--text);
+}
+
+/* top threads */
+.da-comment-list { padding: 0 20px 16px; }
+.da-c-row { padding: 13px 0; border-bottom: 1px solid var(--border); }
+.da-c-row:last-child { border-bottom: none; }
+.da-c-meta { display: flex; align-items: center; justify-content: space-between; margin-bottom: 5px; }
+.da-c-plat {
+  font-size: 10px; font-weight: 700; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--accent);
+  display: flex; align-items: center; gap: 5px;
+}
+.da-c-plat img { width: 11px; height: 11px; }
+.da-c-views { font-size: 11px; color: var(--text-muted); font-weight: 500; }
+.da-c-text { font-size: 13px; color: var(--text); line-height: 1.45; font-weight: 500; }
+.da-c-author { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+/* dash footer */
+.da-foot {
+  border-top: 1px solid var(--border);
+  padding: 18px clamp(20px,4vw,56px);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.da-foot span { font-size: 12px; color: var(--text-muted); }
+.da-foot a { font-size: 12px; color: var(--text-muted); text-decoration: none; }
+.da-foot a:hover { color: var(--ink); }
+
+@media(max-width:640px){
+  .da-kpi-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
 </head>
 <body>
+
+<!-- ── SITE NAV ─────────────────────────────────────────── -->
+<nav class="site-nav">
+  <a class="nav-logo" href="#" onclick="setView('kit');return false">João <span>Marcos</span></a>
+  <div class="nav-tabs">
+    <button class="nav-tab active" id="tab-kit" onclick="setView('kit')">Mídia Kit</button>
+    <button class="nav-tab" id="tab-analytics" onclick="setView('analytics')">Analytics</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW: MÍDIA KIT
+══════════════════════════════════════════════════════ -->
+<div id="view-kit">
+
 <div class="shell">
   <!-- LEFT -->
   <section class="left">
@@ -26,7 +255,6 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg>
         </a>
         <a class="btn btn--outline" href="#kit" target="_self" rel="noopener">Mídia Kit 2026</a>
-        <a class="btn btn--outline" href="dashboard.html">Analytics →</a>
       </div>
     </div>
 
@@ -75,10 +303,10 @@
       <div class="panel">
         <div class="plabel">Onde eu estou</div>
         <div class="plat">
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/instagram/0E0E0E" alt="" />Instagram</span><span class="plat-status">Maior alcance — 59,5 mil views/mês</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/tiktok/0E0E0E" alt="" />TikTok</span><span class="plat-status">Maior crescimento de seguidores</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/threads/0E0E0E" alt="" />Threads</span><span class="plat-status">15,5 mil views · crescendo</span></div>
-          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/substack/0E0E0E" alt="" />Substack</span><span class="plat-status">472 assinantes · newsletter</span></div>
+          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/instagram/C13584" alt="" />Instagram</span><span class="plat-status">Maior alcance — 59,5 mil views/mês</span></div>
+          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="" />TikTok</span><span class="plat-status">Maior crescimento de seguidores</span></div>
+          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="" />Threads</span><span class="plat-status">15,5 mil views · crescendo</span></div>
+          <div class="plat-row"><span class="plat-name"><img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack</span><span class="plat-status">472 assinantes · newsletter</span></div>
         </div>
       </div>
     </div>
@@ -185,7 +413,7 @@
   </div>
 </section>
 
-<!-- ACOMPANHE / NEWSLETTER (Mailchimp) -->
+<!-- ACOMPANHE -->
 <section class="follow" id="acompanhe">
   <div class="follow-inner">
     <div class="follow-copy">
@@ -193,7 +421,6 @@
       <h2 class="follow-title">Treinos, provas &amp; <span class="accent">bastidores</span> no seu e-mail.</h2>
       <p class="follow-sub">Os próximos desafios, resultados e reflexões — direto pra você. Sem spam, cancela quando quiser.</p>
     </div>
-
     <div class="follow-action">
       <a class="btn btn--accent follow-btn" href="https://joaomarcosbomfim.substack.com/subscribe" target="_blank" rel="noopener">
         Quero acompanhar
@@ -208,5 +435,366 @@
   <span>© 2026 João Marcos · Atleta de corrida, natação &amp; crossfit</span>
   <a href="mailto:joaomarcosbomfim@icloud.com">joaomarcosbomfim@icloud.com</a>
 </footer>
+
+</div><!-- /view-kit -->
+
+
+<!-- ══════════════════════════════════════════════════════
+     VIEW: ANALYTICS
+══════════════════════════════════════════════════════ -->
+<div id="view-analytics" style="display:none">
+
+<!-- HERO KPIs -->
+<section class="da-hero">
+  <div class="da-eyebrow">Visão consolidada · últimos 30 dias</div>
+  <h1 class="da-title">4.685 pessoas <span class="acc">acompanham</span> a jornada.</h1>
+  <div class="da-kpi-row" id="da-kpi-row">
+    <div class="da-kpi">
+      <div class="da-kval" id="da-k0">4.685<sup>+</sup></div>
+      <div class="da-klabel" id="da-l0">Seguidores combinados</div>
+      <div class="da-kdelta" id="da-d0">+580 vs junho</div>
+    </div>
+    <div class="da-kpi">
+      <div class="da-kval" id="da-k1">85,3<sup>mil</sup></div>
+      <div class="da-klabel" id="da-l1">Visualizações (30d)</div>
+      <div class="da-kdelta neg" id="da-d1">combinado todas plataformas</div>
+    </div>
+    <div class="da-kpi">
+      <div class="da-kval" id="da-k2">4.942<sup>+</sup></div>
+      <div class="da-klabel" id="da-l2">Interações totais</div>
+      <div class="da-kdelta" id="da-d2">IG + TikTok + Threads</div>
+    </div>
+    <div class="da-kpi">
+      <div class="da-kval" id="da-k3">30,4<sup>mil</sup></div>
+      <div class="da-klabel" id="da-l3">Contas alcançadas</div>
+      <div class="da-kdelta" id="da-d3">56,7% não-seguidores</div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM SWITCHER -->
+<div class="da-sw-wrap">
+  <div class="da-sw-label">Plataforma</div>
+  <div class="da-switcher">
+    <button class="da-sw-btn active" onclick="switchPlatform('ig',this)">
+      <img src="https://cdn.simpleicons.org/instagram/C13584" alt="" />Instagram
+    </button>
+    <button class="da-sw-btn" onclick="switchPlatform('tt',this)">
+      <img src="https://cdn.simpleicons.org/tiktok/EE1D52" alt="" />TikTok
+    </button>
+    <button class="da-sw-btn" onclick="switchPlatform('th',this)">
+      <img src="https://cdn.simpleicons.org/threads/1C1C1C" alt="" />Threads
+    </button>
+    <button class="da-sw-btn" onclick="switchPlatform('sub',this)">
+      <img src="https://cdn.simpleicons.org/substack/FF6719" alt="" />Substack
+    </button>
+  </div>
+</div>
+
+<!-- MAIN GRID: 2/3 + 1/3 -->
+<div class="da-main">
+
+  <div class="da-panel">
+    <div class="da-panel-head">
+      <span class="da-panel-title" id="da-chart-title">Instagram — Seguidores</span>
+      <span class="da-panel-sub">Jun × Jul 2026</span>
+    </div>
+    <div class="da-chart-wrap">
+      <div class="da-chart-legend">
+        <span class="da-leg-item"><span class="da-leg-dot prev"></span>Jun 2026</span>
+        <span class="da-leg-item"><span class="da-leg-dot cur"></span>Jul 2026</span>
+      </div>
+      <svg class="da-chart-svg" id="da-chart-svg" viewBox="0 0 520 200"></svg>
+    </div>
+  </div>
+
+  <div class="da-panel">
+    <div class="da-panel-head">
+      <span class="da-panel-title">Post em destaque</span>
+    </div>
+    <div class="da-top-post" id="da-top-post"></div>
+  </div>
+
+</div>
+
+<!-- BOTTOM GRID: 1/2 + 1/2 -->
+<div class="da-bottom">
+
+  <div class="da-panel">
+    <div class="da-panel-head" style="padding-bottom:14px">
+      <span class="da-panel-title">Seguidores por plataforma</span>
+      <span class="da-panel-sub">Jul 2026</span>
+    </div>
+    <div class="da-spark-list">
+      <div class="da-spark-row">
+        <div>
+          <div class="da-spark-label">Instagram</div>
+          <div class="da-spark-sub">+23 vs jun</div>
+        </div>
+        <svg viewBox="0 0 80 30" style="width:80px;height:30px;display:block">
+          <polyline points="0,26 40,19 80,13" fill="none" stroke="#C13584" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="13" r="3" fill="#C13584"/>
+        </svg>
+        <div class="da-spark-val">1.023</div>
+      </div>
+      <div class="da-spark-row">
+        <div>
+          <div class="da-spark-label">TikTok</div>
+          <div class="da-spark-sub">+90 vs jun</div>
+        </div>
+        <svg viewBox="0 0 80 30" style="width:80px;height:30px;display:block">
+          <polyline points="0,24 40,16 80,8" fill="none" stroke="#EE1D52" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="8" r="3" fill="#EE1D52"/>
+        </svg>
+        <div class="da-spark-val">2.200</div>
+      </div>
+      <div class="da-spark-row">
+        <div>
+          <div class="da-spark-label">Threads</div>
+          <div class="da-spark-sub" style="color:#E5341E">−5 vs jun</div>
+        </div>
+        <svg viewBox="0 0 80 30" style="width:80px;height:30px;display:block">
+          <polyline points="0,13 40,15 80,18" fill="none" stroke="#1C1C1C" stroke-width="2" stroke-linejoin="round" stroke-dasharray="4 3"/>
+          <circle cx="80" cy="18" r="3" fill="#1C1C1C"/>
+        </svg>
+        <div class="da-spark-val" style="color:var(--muted)">990</div>
+      </div>
+      <div class="da-spark-row">
+        <div>
+          <div class="da-spark-label">Substack</div>
+          <div class="da-spark-sub">novo canal</div>
+        </div>
+        <svg viewBox="0 0 80 30" style="width:80px;height:30px;display:block">
+          <polyline points="0,28 40,18 80,4" fill="none" stroke="#FF6719" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="80" cy="4" r="3" fill="#FF6719"/>
+        </svg>
+        <div class="da-spark-val">472</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="da-panel">
+    <div class="da-panel-head" style="padding-bottom:14px">
+      <span class="da-panel-title">Threads · Top conteúdo</span>
+      <span class="da-panel-sub">Jul 2026</span>
+    </div>
+    <div class="da-comment-list">
+      <div class="da-c-row">
+        <div class="da-c-meta">
+          <span class="da-c-plat"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt=""/>Threads</span>
+          <span class="da-c-views">484 views</span>
+        </div>
+        <div class="da-c-text">"Parece que o AirFrance Paris-Rio AFR-442 teve desvio de rota."</div>
+        <div class="da-c-author">3 curtidas · 2 comentários</div>
+      </div>
+      <div class="da-c-row">
+        <div class="da-c-meta">
+          <span class="da-c-plat"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt=""/>Threads</span>
+          <span class="da-c-views">299 views</span>
+        </div>
+        <div class="da-c-text">"Eu adoro quando um livro me faz parar de ler por cinco minutos só pra pensar..."</div>
+        <div class="da-c-author">4 curtidas</div>
+      </div>
+      <div class="da-c-row">
+        <div class="da-c-meta">
+          <span class="da-c-plat"><img src="https://cdn.simpleicons.org/threads/1C1C1C" alt=""/>Threads</span>
+          <span class="da-c-views">208 views</span>
+        </div>
+        <div class="da-c-text">"Eu preciso estar com Deus"</div>
+        <div class="da-c-author">8 curtidas · tendência em 7h</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="da-foot">
+  <span>João Marcos · @bomfim1710 · Dados: 31/07/2026</span>
+  <span>joaomarcosbomfim@icloud.com</span>
+</footer>
+
+</div><!-- /view-analytics -->
+
+
+<script>
+/* ── VIEW TOGGLE ─────────────────────────────────── */
+function setView(v) {
+  document.getElementById('view-kit').style.display       = v === 'kit' ? '' : 'none';
+  document.getElementById('view-analytics').style.display = v === 'analytics' ? '' : 'none';
+  document.getElementById('tab-kit').classList.toggle('active', v === 'kit');
+  document.getElementById('tab-analytics').classList.toggle('active', v === 'analytics');
+  if (v === 'analytics' && !chartInit) { initChart(); chartInit = true; }
+}
+
+/* ── ANALYTICS DATA ──────────────────────────────── */
+const PLAT = {
+  ig: {
+    label: 'Instagram — Seguidores',
+    kpi: ['1.023','59,5<sup>mil</sup>','4.145<sup>+</sup>','30,4<sup>mil</sup>'],
+    kpiLabels: ['Seguidores','Views (30d)','Interações','Alcance'],
+    kpiDeltas: ['+23 vs junho','Reels 74,4%','−1.367 vs jun','56,7% não-seg'],
+    kpiNeg: [false,true,true,false],
+    // actual values: [jun, jul] for follower count
+    barJun: 1000, barJul: 1023, barLabel: 'Seguidores',
+    barMax: 2200,
+    topPost: {
+      platform: 'Instagram',
+      icon: 'https://cdn.simpleicons.org/instagram/C13584',
+      text: 'Reel de treino — 4 de julho. Maior engajamento do mês.',
+      stats: [{v:'231',l:'Interações'},{v:'59,5k',l:'Views'},{v:'4.145',l:'Eng. total'}]
+    }
+  },
+  tt: {
+    label: 'TikTok — Seguidores',
+    kpi: ['2.200','10,3<sup>mil</sup>','489<sup>+</sup>','109'],
+    kpiLabels: ['Seguidores','Views (28d)','Interações','Visitas perfil'],
+    kpiDeltas: ['+90 vs junho','−4,9% vs jun','Curtidas+compart.','−10,7% vs jun'],
+    kpiNeg: [false,true,false,true],
+    barJun: 2110, barJul: 2200, barLabel: 'Seguidores',
+    barMax: 2200,
+    topPost: {
+      platform: 'TikTok',
+      icon: 'https://cdn.simpleicons.org/tiktok/EE1D52',
+      text: 'Compartilhamentos explodiram +300% — conteúdo circulando fora da base.',
+      stats: [{v:'418',l:'Curtidas'},{v:'56',l:'Compart.'},{v:'10,3k',l:'Views'}]
+    }
+  },
+  th: {
+    label: 'Threads — Visualizações',
+    kpi: ['990','15,5<sup>mil</sup>','308<sup>+</sup>','+4<sup>mil</sup>'],
+    kpiLabels: ['Seguidores','Views (30d)','Interações','Crescimento views'],
+    kpiDeltas: ['−5 vs junho','+35% vs jun','308 no período','+4 mil vs jun'],
+    kpiNeg: [true,false,false,false],
+    barJun: 11500, barJul: 15500, barLabel: 'Visualizações',
+    barMax: 16000,
+    topPost: {
+      platform: 'Threads',
+      icon: 'https://cdn.simpleicons.org/threads/1C1C1C',
+      text: '"Parece que o AirFrance Paris-Rio AFR-442 teve desvio de rota."',
+      stats: [{v:'484',l:'Views'},{v:'3',l:'Curtidas'},{v:'2',l:'Coment.'}]
+    }
+  },
+  sub: {
+    label: 'Substack — Assinantes',
+    kpi: ['472','—','—','23.500<sup>%</sup>'],
+    kpiLabels: ['Assinantes','Receita','Monetização','Crescimento relativo'],
+    kpiDeltas: ['de 2 → 472','sem ativa ainda','em breve','saída do zero'],
+    kpiNeg: [false,true,true,false],
+    barJun: 2, barJul: 472, barLabel: 'Assinantes',
+    barMax: 500,
+    topPost: {
+      platform: 'Substack',
+      icon: 'https://cdn.simpleicons.org/substack/FF6719',
+      text: 'Canal mais novo — 472 assinantes no primeiro ciclo completo. Maior crescimento relativo de todos os canais.',
+      stats: [{v:'472',l:'Assinantes'},{v:'+23k%',l:'Crescimento'},{v:'—',l:'Receita'}]
+    }
+  }
+};
+
+let chartInit = false;
+let currentPlat = 'ig';
+
+/* ── BAR CHART: só Jun e Jul, valores reais ──────── */
+function drawBarChart(platKey) {
+  const d = PLAT[platKey];
+  const svg = document.getElementById('da-chart-svg');
+  const W = 520, H = 200;
+  const PL = 56, PR = 24, PT = 16, PB = 40;
+  const cw = W - PL - PR, ch = H - PT - PB;
+  const max = d.barMax;
+  const barW = 64, gap = 32;
+  const totalBarsW = 2 * barW + gap;
+  const startX = PL + (cw - totalBarsW) / 2;
+
+  const hJun = Math.round((d.barJun / max) * ch);
+  const hJul = Math.round((d.barJul / max) * ch);
+  const xJun = startX;
+  const xJul = startX + barW + gap;
+  const yBase = PT + ch;
+
+  // y-axis grid (3 lines)
+  const gridLines = [0, 0.5, 1].map(pct => {
+    const y = PT + ch - pct * ch;
+    const val = Math.round(pct * max);
+    const label = val >= 1000 ? (val/1000).toFixed(val%1000===0?0:1)+'k' : val;
+    return `
+      <line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#E4E4E2" stroke-width="1"/>
+      <text x="${PL-6}" y="${y+4}" text-anchor="end" font-family="'Hanken Grotesk',sans-serif" font-size="10" fill="#6B6B68">${label}</text>
+    `;
+  }).join('');
+
+  // bars
+  const barJun = `
+    <rect x="${xJun}" y="${yBase-hJun}" width="${barW}" height="${hJun}" fill="#E4E4E2" rx="2"/>
+    <text x="${xJun+barW/2}" y="${yBase-hJun-6}" text-anchor="middle"
+      font-family="'League Gothic',sans-serif" font-size="15" fill="#6B6B68" letter-spacing=".01em">
+      ${d.barJun.toLocaleString('pt-BR')}
+    </text>
+    <text x="${xJun+barW/2}" y="${yBase+16}" text-anchor="middle"
+      font-family="'Hanken Grotesk',sans-serif" font-size="11" font-weight="600" fill="#6B6B68">JUN</text>
+  `;
+  const barJul = `
+    <rect x="${xJul}" y="${yBase-hJul}" width="${barW}" height="${hJul}" fill="#E5341E" rx="2"/>
+    <text x="${xJul+barW/2}" y="${yBase-hJul-6}" text-anchor="middle"
+      font-family="'League Gothic',sans-serif" font-size="15" fill="#E5341E" letter-spacing=".01em">
+      ${d.barJul.toLocaleString('pt-BR')}
+    </text>
+    <text x="${xJul+barW/2}" y="${yBase+16}" text-anchor="middle"
+      font-family="'Hanken Grotesk',sans-serif" font-size="11" font-weight="600" fill="#6B6B68">JUL</text>
+  `;
+
+  // delta label between bars
+  const diff = d.barJul - d.barJun;
+  const sign = diff >= 0 ? '+' : '';
+  const diffColor = diff >= 0 ? '#E5341E' : '#6B6B68';
+  const midX = xJun + barW + gap / 2;
+  const midY = yBase - Math.max(hJun, hJul) / 2;
+  const deltaLabel = `
+    <text x="${midX}" y="${midY}" text-anchor="middle"
+      font-family="'Hanken Grotesk',sans-serif" font-size="11" font-weight="700" fill="${diffColor}">
+      ${sign}${diff.toLocaleString('pt-BR')}
+    </text>
+  `;
+
+  svg.innerHTML = gridLines + barJun + barJul + deltaLabel;
+}
+
+function renderTopPost(post) {
+  document.getElementById('da-top-post').innerHTML = `
+    <div class="da-tp-eyebrow">Melhor performance · ${post.platform}</div>
+    <div class="da-tp-card">
+      <div class="da-tp-plat"><img src="${post.icon}" alt=""/> ${post.platform}</div>
+      <div class="da-tp-text">${post.text}</div>
+      <div class="da-tp-stats">
+        ${post.stats.map(s=>`<div class="da-tp-stat"><div class="tv">${s.v}</div><div class="tl">${s.l}</div></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function switchPlatform(key, btn) {
+  currentPlat = key;
+  document.querySelectorAll('.da-sw-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  const d = PLAT[key];
+  document.getElementById('da-chart-title').textContent = d.label;
+  drawBarChart(key);
+  renderTopPost(d.topPost);
+
+  for (let i = 0; i < 4; i++) {
+    document.getElementById('da-k'+i).innerHTML = d.kpi[i];
+    document.getElementById('da-l'+i).textContent = d.kpiLabels[i];
+    const el = document.getElementById('da-d'+i);
+    el.innerHTML = d.kpiDeltas[i];
+    el.className = 'da-kdelta' + (d.kpiNeg[i] ? ' neg' : '');
+  }
+}
+
+function initChart() {
+  drawBarChart('ig');
+  renderTopPost(PLAT.ig.topPost);
+}
+</script>
 </body>
 </html>
