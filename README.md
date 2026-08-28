@@ -1,266 +1,319 @@
-# Social Hub — Multi-Projeto
+# 📱 Social Media Manager — @bomfim1710
 
-**Plataforma centralizada para gerenciar múltiplos perfis/projetos de redes sociais com automação, devocionais, estratégias de conteúdo e analytics em tempo real.**
+**Seu gerenciador completo de redes sociais para crescimento, vendas e monetização.**
 
-🌐 **Site:** https://joaomarcos1710.github.io/redes-sociais  
-📊 **Figma:** https://www.figma.com/design/Njx2zQji8Pc0H9uBN8KsvX  
-📁 **Docs:** [ESTRUTURA.md](ESTRUTURA.md) — Guia completo da organização
-
----
-
-## 🎯 O que é?
-
-Um hub centralizado para:
-
-✅ **Monitorar** múltiplos projetos/perfis de redes sociais  
-✅ **Automatizar** coleta de analytics (Apify)  
-✅ **Agendar** posts em múltiplas plataformas  
-✅ **Criar** e publicar devocionais automáticos  
-✅ **Planejar** estratégias de conteúdo  
-✅ **Visualizar** dashboards por projeto  
+🎯 **Objetivo:** Crescer de 4.7k → 10k+ seguidores + Vender via TikTok Shop + Monetizar Substack  
+👤 **Criador:** João Marcos Bomfim (@bomfim1710)  
+📍 **Nicho:** Atleta amador + Criador de conteúdo sobre fé  
+📊 **Plataformas:** TikTok, Instagram, Threads, YouTube, Substack
 
 ---
 
-## 📂 Estrutura
+## 🎯 O Que É Esse Projeto?
 
-```
-projects/
-├── bomfim1710/              # Projeto existente
-│   ├── config.json          # Configuração
-│   ├── index.html           # Dashboard
-│   ├── analytics/           # Snapshots
-│   ├── content/             # Posts
-│   └── devotionals/         # Devocionais
-│
-├── projeto-2/               # Seu próximo projeto
-└── _project-template/       # Template para copiar
-```
+**NÃO é uma plataforma SaaS.**
 
-**[Ver estrutura completa →](ESTRUTURA.md)**
+É um **Social Media Manager completo** que inclui:
 
----
+✅ **Criação de conteúdo**
+- Postagens para todas as plataformas
+- Vídeos TikTok + ideias de nichos
+- Textos Substack + calendário editorial
+- Ideias Instagram + reels
+- Threads engajantes
 
-## 🚀 Quick Start
+✅ **Análise de métricas**
+- Dashboard com dados em tempo real
+- Identifiação de padrões
+- O que funciona vs o que não funciona
 
-### 1. Adicionar novo projeto
-```bash
-cp -r projects/_project-template projects/seu-projeto
-cd projects/seu-projeto
-```
+✅ **Estratégia de crescimento**
+- 4.7k → 10k seguidores (próxima meta)
+- Growth hacking por plataforma
+- Identificação de oportunidades
 
-### 2. Editar config.json
-```json
-{
-  "project": {
-    "name": "Seu Nome",
-    "handle": "@seu-handle"
-  },
-  "platforms": {
-    "tiktok": { "enabled": true },
-    "instagram": { "enabled": true }
-  }
-}
-```
+✅ **Vendas**
+- TikTok Shop strategy
+- Produtos digitais
+- Monetização Substack
 
-### 3. Gerar snapshot mensal
-```bash
-export APIFY_TOKEN=seu_token
-export PROJECT=seu-projeto
-node scripts/fetch-social-stats.js
-```
-
-### 4. Ver dashboard
-Abra `projects/seu-projeto/index.html` no navegador.
+✅ **Automação**
+- Snapshots mensais de analytics
+- Agendamento de posts (futuro)
+- Coleta de dados Apify  
 
 ---
 
-## 📊 Projetos Ativos
+## 📊 Números Atuais (Agosto 2026)
 
-| Projeto | Status | Plataformas | Dashboard |
+| Plataforma | Seguidores | Crescimento | Status |
 |---|---|---|---|
-| **bomfim1710** | ✅ Ativo | TikTok, Instagram, Threads, YouTube, Substack | [Abrir](projects/bomfim1710/index.html) |
-| Seu Projeto 2 | 🔄 Em setup | — | — |
-| Seu Projeto 3 | 🔄 Em setup | — | — |
+| **TikTok** | 2.200+ | +90 (viral +300% compartilhamentos) | 🔥 Quente |
+| **Instagram** | 1.023 | Estável | 📊 Base sólida |
+| **Threads** | 990 | +35% vs junho | 🟢 Crescendo |
+| **YouTube** | 44+ | Novo | 🆕 Iniciando |
+| **Substack** | 472 | +23.500% (launch) | 🚀 Explosivo |
+| **TOTAL** | **~4.700** | — | — |
 
 ---
 
-## 🎬 Arquivos por Seção
+## 🎯 Próximas Metas
 
-### `/projects/[projeto]/`
-- **config.json** — Configuração (plataformas, cores, fonts, pillars)
-- **index.html** — Dashboard interativo
-- **analytics/** — Snapshots mensais (Apify)
-- **content/** — Posts agendados
-- **devotionals/** — Devocionais do projeto
-- **strategies/** — Planos de conteúdo
-
-### `/content/`
-- **devotionals/** — Base de devocionais compartilhada
-- **strategies/** — Estratégias gerais e calendário editorial
-- **templates/** — Links para Figma templates
-
-### `/scripts/`
-- **fetch-social-stats.js** — Coleta analytics (multi-projeto)
-- **schedule-posts.js** (futura) — Publica posts agendados
-- **generate-devotionals.js** (futura) — Gera devocionais com IA
-
-### `/data/`
-- **snapshots/** — Histórico de analytics
-- **posts-scheduled/** — Fila de publicação
-- **devotionals/** — Base histórica
+| Meta | Target | Progress | Prazo |
+|---|---|---|---|
+| **TikTok 10k** | 10.000 | 2.200 (22%) | Q4 2026 |
+| **Instagram 2k** | 2.000 | 1.023 (51%) | Q4 2026 |
+| **Threads 2k** | 2.000 | 990 (49%) | Q4 2026 |
+| **Monetizar Substack** | $500/mês | $0 | Q4 2026 |
+| **TikTok Shop** | $1k/mês | Planejamento | Q4 2026 |
 
 ---
 
-## 🔄 Automação (GitHub Actions)
+## 🎬 Pilares de Conteúdo
 
-| Workflow | Trigger | O que faz |
-|---|---|---|
-| monthly-snapshot.yml | 1º do mês, 8h BRT | Coleta analytics (Apify) |
-| daily-devotional.yml | Todo dia, 6h BRT | Publica devocional agendado |
-| social-posting.yml | A cada 2h | Publica posts na hora certa |
+### 40% — Corrida & Treino 🏃
+- Resultados de provas/treinos
+- Tips de nutrição e recuperação
+- Histórias de perseverança
+- Vídeos de treino no TikTok
+
+### 40% — Fé & Espiritualidade 🙏
+- Versículos diários (Substack)
+- Reflexões profundas
+- Stories inspiradores
+- Devocionais em vídeo (YouTube)
+
+### 20% — Lifestyle & Comunidade ❤️
+- Behind-the-scenes
+- Dia a dia
+- Interação com seguidores
+- Reels descontraídos
 
 ---
 
-## 🎨 Dados Estruturados
+## 📁 Estrutura do Projeto
 
-### Analytics Snapshot
-```markdown
----
-data: 2026-08-28
-tipo: snapshot_mensal
-tt_seguidores: 2200
-tt_views: 10300
-ig_seguidores: 1023
----
-
-## 📊 Agosto 2026
-...
 ```
-
-### Post Agendado
-```markdown
----
-titulo: "Corri 21km!"
-plataformas: [tiktok, instagram]
-data: 2026-09-10T18:00:00
-status: scheduled
-pilar: corrida
----
-
-Conteúdo do post...
-```
-
-### Devocional
-```markdown
----
-data: 2026-08-28
-versículo: "João 3:16"
-tema: fé
----
-
-## Reflexão
-...
+/projects/bomfim1710/
+├── content/
+│   ├── ideias/
+│   │   ├── tiktok-ideias.md
+│   │   ├── instagram-reels.md
+│   │   ├── threads-ideias.md
+│   │   └── youtube-ideias.md
+│   │
+│   ├── calendário/
+│   │   ├── setembro-2026.md
+│   │   ├── outubro-2026.md
+│   │   └── novembro-2026.md
+│   │
+│   ├── postagens/
+│   │   ├── substack-textos.md
+│   │   ├── captions-instagram.md
+│   │   ├── roteiros-tiktok.md
+│   │   └── tweets-threads.md
+│   │
+│   └── tiktok-shop/
+│       ├── estrategia.md
+│       ├── produtos.md
+│       └── vendas-roadmap.md
+│
+├── analytics/
+│   ├── 2026-08-28.md (snapshot mensal)
+│   ├── insights.md (o que funciona)
+│   └── competitors.md (análise)
+│
+└── index.html (dashboard de métricas)
 ```
 
 ---
 
-## 🔐 Segurança
+## 🚀 Como Usar
 
-Secrets GitHub (Settings > Secrets > Actions):
-- `APIFY_TOKEN` — Apify API
-- `META_ACCESS_TOKEN` — Instagram/Threads
-- `TIKTOK_ACCESS_TOKEN` — TikTok
-- `YOUTUBE_API_KEY` — YouTube
-
-**Nunca commit credenciais!** Use `.env` ou GitHub Secrets.
-
----
-
-## 📚 Documentação
-
-| Documento | Conteúdo |
-|---|---|
-| [ESTRUTURA.md](ESTRUTURA.md) | Guia completo da organização |
-| [CONVERSA.md](CONVERSA.md) | Histórico técnico do projeto |
-| [PORTFOLIO.md](PORTFOLIO.md) | Portfolio pessoal |
-| **config.json** | Configuração por projeto |
-
----
-
-## 🎯 Roadmap
-
-### Curto Prazo (Próximas 2 semanas)
-- [ ] Reorganizar estrutura (FEITO ✅)
-- [ ] Criar config.json por projeto
-- [ ] Dashboard agregador
-- [ ] Estratégia de conteúdo Q4
-
-### Médio Prazo (Próximas 8 semanas)
-- [ ] Schedule posts (Buffer ou direto)
-- [ ] IA para gerar devocionais
-- [ ] Social listening
-- [ ] Previsões de growth (ML)
-
-### Longo Prazo (6+ meses)
-- [ ] App mobile
-- [ ] Integração com todas plataformas
-- [ ] Community management tools
-- [ ] E-learning (cursos de conteúdo)
-
----
-
-## 💡 Exemplos de Uso
-
-### Ver analytics de um projeto
+### 1️⃣ **Ver Métricas**
 ```bash
-cd projects/bomfim1710
-cat analytics/2026-08-28.md  # Último snapshot
+# Dashboard interativo
+https://joaomarcos1710.github.io/redes-sociais
+
+# API com dados
+https://social-media-hub-api.fly.dev/docs
 ```
 
-### Listar todos os posts agendados
-```bash
-ls -la data/posts-scheduled/
-```
+### 2️⃣ **Ideias de Conteúdo**
+- Ver `/projects/bomfim1710/content/ideias/`
+- Ideas por plataforma + nichos
 
-### Criar novo devocional
-```bash
-cp content/devotionals/_template.md content/devotionals/2026-09-01.md
-# Editar arquivo
-git add content/devotionals/2026-09-01.md
-git commit -m "feat: add devotional for 2026-09-01"
-```
+### 3️⃣ **Calendário Editorial**
+- Ver `/projects/bomfim1710/content/calendário/`
+- Posts planejados por mês
 
-### Adicionar novo projeto
-```bash
-cp -r projects/_project-template projects/meu-novo-projeto
-# Editar config.json e estrutura
+### 4️⃣ **Postagens Prontas**
+- Textos Substack
+- Captions Instagram
+- Roteiros TikTok
+- Threads engajantes
+
+### 5️⃣ **TikTok Shop**
+- Estratégia de vendas
+- Produtos para vender
+- Growth roadmap
+
+---
+
+## 📊 Analytics & Insights
+
+### O Que Funciona (TikTok)
+✅ **Viral:** Compartilhamentos +300%  
+✅ **Audience:** 25-34 anos (38%), masculino 55,6%  
+✅ **Melhor horário:** Noite (19h-22h)  
+✅ **Tipo:** Vídeos curtos, motivacionais, fé
+
+### O Que Cresce (Threads)
+✅ **Threads:** +35% vs junho  
+✅ **Tipo:** Discussões profundas, fé  
+✅ **Engagement:** 31% (excelente)  
+✅ **Potencial:** Alto para crescimento rápido
+
+### O Que É Base (Instagram)
+✅ **Instagram:** 1.023 seguidores (estável)  
+✅ **Tipo:** Reels (74% das views)  
+✅ **Horário:** Pico 15h  
+✅ **Estratégia:** Manter base + crescer com Reels
+
+### O Que É Novo (YouTube)
+✅ **YouTube:** 44 inscritos, 104 vídeos  
+✅ **Tipo:** Conteúdo long-form  
+✅ **Potencial:** Alto (mais monetização)  
+✅ **Estratégia:** Criar 2-3 vídeos/semana
+
+### O Que Vende (Substack)
+✅ **Substack:** 472 assinantes (+23.500%)  
+✅ **Tipo:** Textos profundos + reflexão  
+✅ **Potencial:** Monetizar ($500-1k/mês)  
+✅ **Estratégia:** 2 emails/semana
+
+---
+
+## 🛍️ TikTok Shop Strategy
+
+### Produtos Possíveis
+1. **E-books** (Fé + Corrida)
+2. **Curso Online** (Treino + Fé)
+3. **Consultoria** (1-on-1)
+4. **Merch** (Camisetas com frases)
+5. **Programa de Treino** (PDF)
+
+### Meta
+- **Q4 2026:** $1k/mês em vendas
+- **2027:** $5k+/mês
+
+---
+
+## 🔄 Workflow
+
+```
+1. PLANEJAMENTO
+   └─ Calendário editorial
+      └─ Ideias por pilar
+
+2. CRIAÇÃO
+   └─ Postagens prontas
+      ├─ Textos Substack
+      ├─ Captions Instagram
+      ├─ Roteiros TikTok
+      └─ Threads
+
+3. PUBLICAÇÃO
+   └─ Publicar nas plataformas
+      └─ Manual (ou agendado futuro)
+
+4. MONITORAMENTO
+   └─ Analytics
+      ├─ Engagement
+      ├─ Growth
+      └─ Oportunidades
+
+5. OTIMIZAÇÃO
+   └─ Refazer o que funciona
+      └─ Iterar estratégia
 ```
 
 ---
 
-## 🤝 Contribuindo
+## 🎁 Ferramentas & Recursos
 
-1. **Crie um novo projeto:** `cp -r projects/_project-template projects/seu-projeto`
-2. **Edite config.json** com suas plataformas e configurações
-3. **Faça commit:** `git commit -m "feat: add project 'seu-projeto'"`
-4. **Push:** `git push origin main`
+### Criação
+- **Figma Templates** — 4 templates profissionais prontos
+- **Idea Bank** — Ideias por pilar e plataforma
+- **Calendário** — Planejamento mensal
 
----
+### Análise
+- **Dashboard** — Métricas em tempo real
+- **API REST** — Dados estruturados
+- **Snapshots** — Histórico mensal
 
-## 📞 Suporte
-
-- 📖 [Documentação completa](ESTRUTURA.md)
-- 🎬 [Exemplo de projeto](projects/bomfim1710/)
-- 💬 Issues no GitHub
-
----
-
-## 📄 Licença
-
-MIT — Livre para usar e modificar
+### Automação
+- **GitHub Actions** — Deploy automático
+- **Apify** — Coleta de dados
+- **Agendamento** — Posts futuro (planejado)
 
 ---
 
+## 📚 Links Importantes
+
+### 🌐 Live
+- **Dashboard:** https://joaomarcos1710.github.io/redes-sociais
+- **API:** https://social-media-hub-api.fly.dev
+- **Figma Templates:** https://www.figma.com/design/Njx2zQji8Pc0H9uBN8KsvX
+
+### 📱 Social Media
+- **TikTok:** https://www.tiktok.com/@bomfim1710
+- **Instagram:** https://www.instagram.com/bomfim1710
+- **Threads:** https://www.threads.net/@bomfim1710
+- **YouTube:** https://www.youtube.com/@bomfim1710
+- **Substack:** https://joaomarcosbomfim.substack.com
+
+### 💻 GitHub
+- **Repo:** https://github.com/joaomarcos1710/Redes-Sociais
+- **Docs:** CONVERSA.md, ESTRUTURA.md, DEPLOY.md
+
+---
+
+## 📊 Métricas de Sucesso
+
+| Métrica | Alvo | Atual | % |
+|---|---|---|---|
+| Seguidores TikTok | 10k | 2.2k | 22% |
+| Seguidores Instagram | 2k | 1k | 50% |
+| Seguidores Threads | 2k | 990 | 49% |
+| Renda Substack | $500/mês | $0 | 0% |
+| TikTok Shop | $1k/mês | $0 | 0% |
+| Engagement TikTok | >3% | 4.7% | ✅ |
+
+---
+
+## 🎯 Próximos Steps
+
+1. ✅ GitHub organizado
+2. ✅ Notion com ideias + calendário
+3. ⏳ **Ideias de conteúdo da semana**
+4. ⏳ **Estratégia TikTok Shop**
+5. ⏳ **Análise de competitors**
+6. ⏳ **Calendário setembro/outubro**
+
+---
+
+**Status:** MVP Pronto | Em Criação  
 **Última atualização:** 28 de agosto de 2026  
-**Versão:** 1.0 (reorganização estrutural)  
-**Mantido por:** Claude Code + João Marcos Bomfim
+**Criador:** João Marcos Bomfim (@bomfim1710)
+
+---
+
+## 🤝 Feedback?
+
+Compartilhe com outras IAs e colete ideias de:
+- Growth strategies
+- Content ideas
+- TikTok Shop products
+- Monetização Substack
+- Análise de competitors
