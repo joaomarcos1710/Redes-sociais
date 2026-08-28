@@ -1,0 +1,84 @@
+{
+  "project": {
+    "name": "Seu Nome",
+    "handle": "@seu-handle",
+    "description": "Descrição do projeto",
+    "website": "https://seu-site.com",
+    "email": "seu-email@gmail.com"
+  },
+  "branding": {
+    "colors": {
+      "accent": "#000000",
+      "ink": "#000000",
+      "off-white": "#FFFFFF",
+      "white": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "Sua font",
+      "body": "Sua font"
+    },
+    "figmaFile": "link para Figma"
+  },
+  "platforms": {
+    "tiktok": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": "clockworks/tiktok-profile-scraper"
+    },
+    "instagram": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": null
+    },
+    "threads": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": "futurizerush/meta-threads-scraper"
+    },
+    "youtube": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": "streamers/youtube-channel-scraper"
+    },
+    "substack": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": null
+    },
+    "twitch": {
+      "enabled": false,
+      "handle": null,
+      "url": null,
+      "apifyActor": null
+    }
+  },
+  "contentPillars": [
+    {
+      "name": "Pilar 1",
+      "percentage": 50,
+      "emoji": "📌",
+      "templates": []
+    },
+    {
+      "name": "Pilar 2",
+      "percentage": 50,
+      "emoji": "📌",
+      "templates": []
+    }
+  ],
+  "automation": {
+    "monthlySnapshot": {
+      "enabled": false,
+      "schedule": "0 11 1 * *"
+    },
+    "dailyDevotional": {
+      "enabled": false,
+      "schedule": "0 6 * * *"
+    }
+  }
+}

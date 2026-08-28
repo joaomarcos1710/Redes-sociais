@@ -1,0 +1,88 @@
+{
+  "project": {
+    "name": "João Marcos Bomfim",
+    "handle": "@bomfim1710",
+    "description": "Atleta amador de corrida + Criador de conteúdo sobre fé",
+    "website": "https://joaomarcos1710.github.io/redes-sociais",
+    "email": "joaomarcos1710@gmail.com"
+  },
+  "branding": {
+    "colors": {
+      "accent": "#E5341E",
+      "ink": "#0E0E0E",
+      "off-white": "#F5F4F2",
+      "white": "#FFFFFF"
+    },
+    "fonts": {
+      "display": "League Gothic",
+      "body": "Hanken Grotesk"
+    },
+    "figmaFile": "https://www.figma.com/design/Njx2zQji8Pc0H9uBN8KsvX"
+  },
+  "platforms": {
+    "tiktok": {
+      "enabled": true,
+      "handle": "@bomfim1710",
+      "url": "https://www.tiktok.com/@bomfim1710",
+      "apifyActor": "clockworks/tiktok-profile-scraper"
+    },
+    "instagram": {
+      "enabled": true,
+      "handle": "bomfim1710",
+      "url": "https://www.instagram.com/bomfim1710",
+      "apifyActor": null,
+      "note": "Manual update or Meta API (instagram_manage_insights)"
+    },
+    "threads": {
+      "enabled": true,
+      "handle": "@bomfim1710",
+      "url": "https://www.threads.net/@bomfim1710",
+      "apifyActor": "futurizerush/meta-threads-scraper"
+    },
+    "youtube": {
+      "enabled": true,
+      "handle": "@bomfim1710",
+      "url": "https://www.youtube.com/@bomfim1710",
+      "apifyActor": "streamers/youtube-channel-scraper"
+    },
+    "substack": {
+      "enabled": true,
+      "handle": "joaomarcosbomfim",
+      "url": "https://joaomarcosbomfim.substack.com",
+      "apifyActor": null,
+      "note": "Manual update"
+    }
+  },
+  "contentPillars": [
+    {
+      "name": "Corrida & Treino",
+      "percentage": 40,
+      "emoji": "🏃",
+      "templates": ["Post de Corrida", "Story/Reel Cover"]
+    },
+    {
+      "name": "Fé & Espiritualidade",
+      "percentage": 40,
+      "emoji": "🙏",
+      "templates": ["Citação de Fé", "Devocional"]
+    },
+    {
+      "name": "Lifestyle & Comunidade",
+      "percentage": 20,
+      "emoji": "❤️",
+      "templates": ["Post Feed", "Story/Reel Cover"]
+    }
+  ],
+  "automation": {
+    "monthlySnapshot": {
+      "enabled": true,
+      "schedule": "0 11 1 * *",
+      "note": "1º do mês, 08:00 BRT"
+    },
+    "dailyDevotional": {
+      "enabled": false,
+      "schedule": "0 6 * * *",
+      "note": "Agendado para futura implementação"
+    }
+  }
+}
