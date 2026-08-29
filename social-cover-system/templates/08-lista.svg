@@ -1,0 +1,82 @@
+<svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <!-- TEMPLATE 08: LISTA | 60% lista + 40% espaço -->
+  <!-- Ideal para: "5 coisas...", "Como...", conteúdo estruturado -->
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+      .list-number {
+        font-family: 'League Gothic', sans-serif;
+        font-size: 100px;
+        font-weight: 700;
+        fill: #E5341E;
+        text-transform: uppercase;
+        letter-spacing: -2px;
+      }
+
+      .list-item {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 24px;
+        font-weight: 600;
+        fill: #FFFFFF;
+        line-height: 1.3;
+      }
+
+      .header {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 28px;
+        font-weight: 600;
+        fill: #F5F4F2;
+        letter-spacing: 0.5px;
+      }
+
+      .signature {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        fill: #4A4A4A;
+      }
+    </style>
+  </defs>
+
+  <!-- FUNDO -->
+  <rect width="1080" height="1350" fill="#0E0E0E"/>
+
+  <!-- CONTEÚDO -->
+  <g id="content">
+    <!-- HEADER -->
+    <text x="60" y="180" class="header" id="header">
+      5 Lessons You Need
+    </text>
+
+    <!-- ITEM 1 -->
+    <g>
+      <text x="60" y="340" class="list-number">01</text>
+      <text x="180" y="315" class="list-item">Consistency</text>
+      <text x="180" y="345" font-family="'Montserrat', sans-serif" font-size="16" fill="#AEAEAE">beats perfection</text>
+    </g>
+
+    <!-- ITEM 2 -->
+    <g>
+      <text x="60" y="570" class="list-number">02</text>
+      <text x="180" y="545" class="list-item">Your voice</text>
+      <text x="180" y="575" font-family="'Montserrat', sans-serif" font-size="16" fill="#AEAEAE">is unique</text>
+    </g>
+
+    <!-- ITEM 3 -->
+    <g>
+      <text x="60" y="800" class="list-number">03</text>
+      <text x="180" y="775" class="list-item">Action creates</text>
+      <text x="180" y="805" font-family="'Montserrat', sans-serif" font-size="16" fill="#AEAEAE">momentum</text>
+    </g>
+
+    <!-- ASSINATURA -->
+    <text x="60" y="1310" class="signature">@bomfim1710</text>
+  </g>
+
+  <!-- LINHAS DIVISÓRIAS -->
+  <line x1="60" y1="380" x2="1020" y2="380" stroke="#2A2A2A" stroke-width="1"/>
+  <line x1="60" y1="610" x2="1020" y2="610" stroke="#2A2A2A" stroke-width="1"/>
+</svg>
