@@ -1,0 +1,59 @@
+<svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <!-- TEMPLATE 06: MINIMALISTA | 20% conteúdo + 80% vazio -->
+  <!-- Ideal para: Conceitos, reflexões, elegância -->
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+      .word-minimal {
+        font-family: 'League Gothic', sans-serif;
+        font-size: 140px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        line-height: 1;
+      }
+
+      .descriptor {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        fill: #AEAEAE;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+      }
+
+      .signature {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        fill: #4A4A4A;
+      }
+    </style>
+  </defs>
+
+  <!-- FUNDO PRETO -->
+  <rect width="1080" height="1350" fill="#0E0E0E"/>
+
+  <!-- CONTEÚDO CENTRALIZADO -->
+  <g id="content">
+    <!-- DESCRIPTOR -->
+    <text x="540" y="400" class="descriptor" text-anchor="middle" id="descriptor">
+      A reflection about
+    </text>
+
+    <!-- PALAVRA PRINCIPAL -->
+    <text x="540" y="800" class="word-minimal" text-anchor="middle" id="main-word">
+      ESSENCE
+    </text>
+
+    <!-- ASSINATURA -->
+    <text x="540" y="1310" class="signature" text-anchor="middle">@bomfim1710</text>
+  </g>
+
+  <!-- DECORAÇÃO SUTIL (Linha divisória vermelha) -->
+  <rect x="300" y="880" width="480" height="2" fill="#E5341E" opacity="0.4"/>
+</svg>

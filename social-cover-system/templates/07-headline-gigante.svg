@@ -1,0 +1,65 @@
+<svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <!-- TEMPLATE 07: HEADLINE GIGANTE | 90% tipografia + 10% outros -->
+  <!-- Ideal para: Ênfase máxima, números, chamadas urgentes -->
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+      .giant-headline {
+        font-family: 'League Gothic', sans-serif;
+        font-size: 280px;
+        font-weight: 700;
+        fill: #E5341E;
+        text-transform: uppercase;
+        letter-spacing: -5px;
+        line-height: 0.9;
+      }
+
+      .context {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        fill: #AEAEAE;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+      }
+
+      .signature {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        fill: #4A4A4A;
+      }
+    </style>
+  </defs>
+
+  <!-- FUNDO -->
+  <rect width="1080" height="1350" fill="#0E0E0E"/>
+
+  <!-- ELEMENTO DECORATIVO -->
+  <circle cx="0" cy="1350" r="300" fill="#2A2A2A" opacity="0.3"/>
+  <circle cx="1080" cy="0" r="250" fill="#2A2A2A" opacity="0.3"/>
+
+  <!-- CONTEÚDO -->
+  <g id="content">
+    <!-- CONTEXTO -->
+    <text x="60" y="120" class="context" id="context">
+      The number that matters
+    </text>
+
+    <!-- NÚMERO/WORD GIGANTE -->
+    <text x="60" y="750" class="giant-headline" id="big-number">
+      <tspan x="60" dy="0">365</tspan>
+    </text>
+
+    <!-- EXPLICAÇÃO -->
+    <text x="60" y="1100" font-family="'Montserrat', sans-serif" font-size="24" fill="#FFFFFF" id="explanation">
+      days to change your life
+    </text>
+
+    <!-- ASSINATURA -->
+    <text x="60" y="1310" class="signature">@bomfim1710</text>
+  </g>
+</svg>

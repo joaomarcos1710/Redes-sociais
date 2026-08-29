@@ -1,0 +1,80 @@
+<svg viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+  <!-- TEMPLATE 02: FOTOGRÁFICO | 80% foto + 20% tipografia discreta -->
+  <!-- Ideal para: Fotos muito fortes que falam sozinhas -->
+
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=League+Gothic&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+      .headline-minimal {
+        font-family: 'League Gothic', sans-serif;
+        font-size: 72px;
+        font-weight: 700;
+        fill: #FFFFFF;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.1;
+      }
+
+      .subtitle-minimal {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        fill: #AEAEAE;
+        line-height: 1.4;
+      }
+
+      .signature {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        fill: #4A4A4A;
+      }
+    </style>
+
+    <linearGradient id="overlay-photo" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0" />
+      <stop offset="70%" style="stop-color:#000000;stop-opacity:0.15" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.3" />
+    </linearGradient>
+  </defs>
+
+  <!-- BACKGROUND -->
+  <rect width="1080" height="1350" fill="#0E0E0E"/>
+
+  <!-- IMAGEM PLACEHOLDER -->
+  <rect width="1080" height="1350" fill="#2A2A2A" opacity="0.4"/>
+  <text x="540" y="675" text-anchor="middle" font-size="14" fill="#AEAEAE" opacity="0.5">
+    [IMAGEM FOTOGRÁFICA - Foco em pessoas/ação - 1080×1350]
+  </text>
+
+  <!-- OVERLAY LEVE -->
+  <rect width="1080" height="1350" fill="url(#overlay-photo)"/>
+
+  <!-- CONTEÚDO MÍNIMO -->
+  <g id="content">
+    <!-- Tipografia posicionada na base -->
+    <rect x="0" y="1100" width="1080" height="250" fill="url(#overlay-base)" opacity="0.6"/>
+
+    <!-- HEADLINE -->
+    <text x="60" y="1170" class="headline-minimal" id="headline">
+      <tspan x="60" dy="0">PHOTO</tspan>
+    </text>
+
+    <!-- SUBTÍTULO -->
+    <text x="60" y="1260" class="subtitle-minimal" id="subtitle">
+      Something inspiring about the moment
+    </text>
+
+    <!-- ASSINATURA -->
+    <text x="1020" y="1330" class="signature" text-anchor="end">@bomfim1710</text>
+  </g>
+
+  <defs>
+    <linearGradient id="overlay-base" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.4" />
+    </linearGradient>
+  </defs>
+</svg>
